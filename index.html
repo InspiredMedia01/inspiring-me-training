@@ -16,7 +16,7 @@
   --border:rgba(255,255,255,0.08);--border-gold:rgba(201,153,31,0.3);
   --surface:rgba(255,255,255,0.04);
 }
-body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--white);min-height:100vh;display:flex;}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--white);min-height:100vh;}
 
 /* ONBOARDING */
 #onboarding{
@@ -93,7 +93,7 @@ nav{flex:1;padding:8px 0;}
 .reset-btn:hover{color:rgba(255,255,255,0.5);}
 
 /* MAIN */
-#main{margin-left:260px;flex:1;display:flex;flex-direction:column;min-height:100vh;}
+#main{margin-left:260px;width:calc(100% - 260px);display:flex;flex-direction:column;min-height:100vh;}
 .topbar{
   background:var(--black);border-bottom:1px solid var(--border);
   padding:14px 44px;display:flex;align-items:center;justify-content:space-between;
@@ -233,7 +233,7 @@ nav{flex:1;padding:8px 0;}
 
 
 /* ══ TAB SYSTEM ══ */
-#tab-bar{background:var(--black);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 0 0 260px;position:sticky;top:0;z-index:60;}
+#tab-bar{background:var(--black);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;position:sticky;top:0;z-index:60;}
 .tab-btn{padding:14px 28px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-family:'DM Sans',sans-serif;cursor:pointer;border:none;background:transparent;color:var(--muted);border-bottom:2px solid transparent;transition:all 0.2s;}
 .tab-btn:hover{color:var(--white);}
 .tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
@@ -422,14 +422,12 @@ header{background:var(--black);border-bottom:1px solid var(--border);padding:14p
 
 </div>
 
-<!-- TAB BAR -->
+<!-- MAIN -->
+<div id="main">
 <div id="tab-bar">
   <button class="tab-btn active" id="tab-training" onclick="switchTab('training')">📚 Training</button>
   <button class="tab-btn" id="tab-coach" onclick="switchTab('coach')">💬 Conversation Coach</button>
 </div>
-
-<!-- MAIN -->
-<div id="main">
 
   <!-- TRAINING TAB -->
   <div id="pane-training" class="tab-pane active">
@@ -1100,15 +1098,14 @@ function switchTab(tab){
   document.getElementById('tab-'+tab).classList.add('active');
   const sidebar=document.getElementById('sidebar');
   const main=document.getElementById('main');
-  const tabBar=document.getElementById('tab-bar');
   if(tab==='training'){
     sidebar.style.display='flex';
     main.style.marginLeft='260px';
-    tabBar.style.paddingLeft='260px';
+    main.style.width='calc(100% - 260px)';
   } else {
     sidebar.style.display='none';
     main.style.marginLeft='0';
-    tabBar.style.paddingLeft='0';
+    main.style.width='100%';
   }
 }
 
