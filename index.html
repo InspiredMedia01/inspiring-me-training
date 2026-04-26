@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inspiring Me CIC — Sales Training</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0f0f0d;--dark:#1a1a16;--charcoal:#242420;
+  --gold:#c9991f;--gold-light:#e8b82a;--gold-pale:rgba(201,153,31,0.12);
+  --green:#3d6b28;--green-bright:#5a9e38;--green-pale:rgba(90,158,56,0.12);
+  --white:#ffffff;--muted:rgba(255,255,255,0.45);
+  --border:rgba(255,255,255,0.08);--border-gold:rgba(201,153,31,0.3);
+  --surface:rgba(255,255,255,0.04);
+}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--white);min-height:100vh;display:flex;}
+
+/* ONBOARDING */
+#onboarding{
+  position:fixed;inset:0;background:var(--black);z-index:999;
+  display:flex;align-items:center;justify-content:center;
+}
+.ob-box{max-width:400px;width:90%;text-align:center;padding:40px 32px;}
+.ob-org{font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
+.ob-title{font-family:'Bebas Neue',sans-serif;font-size:50px;letter-spacing:2px;color:var(--white);line-height:1.0;margin-bottom:8px;}
+.ob-title span{color:var(--gold);}
+.ob-sub{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:28px;}
+.ob-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);display:block;text-align:left;margin-bottom:8px;}
+.ob-input{
+  width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);
+  border-radius:8px;padding:13px 16px;font-size:15px;font-family:'DM Sans',sans-serif;
+  color:var(--white);outline:none;margin-bottom:16px;transition:border-color 0.2s;
+}
+.ob-input:focus{border-color:var(--gold);}
+.ob-input::placeholder{color:rgba(255,255,255,0.2);}
+.ob-btn{
+  width:100%;background:var(--gold);color:var(--black);border:none;border-radius:8px;
+  padding:14px;font-size:14px;font-weight:700;font-family:'DM Sans',sans-serif;
+  cursor:pointer;letter-spacing:0.5px;transition:background 0.2s;
+}
+.ob-btn:hover:not(:disabled){background:var(--gold-light);}
+.ob-btn:disabled{opacity:0.35;cursor:not-allowed;}
+.ob-note{font-size:11px;color:rgba(255,255,255,0.2);margin-top:14px;}
+
+/* SIDEBAR */
+#sidebar{
+  width:260px;min-height:100vh;background:var(--black);
+  display:flex;flex-direction:column;flex-shrink:0;
+  position:fixed;top:0;left:0;bottom:0;overflow-y:auto;
+  border-right:1px solid var(--border);z-index:100;
+}
+.logo-block{padding:24px 24px 18px;border-bottom:1px solid var(--border);}
+.logo-brand{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--white);}
+.logo-brand span{color:var(--gold);}
+.logo-sub{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:3px;}
+.logo-user{font-size:12px;color:rgba(255,255,255,0.3);margin-top:8px;}
+.logo-user span{color:var(--gold);font-weight:500;}
+
+.prog-block{padding:14px 24px;border-bottom:1px solid var(--border);}
+.prog-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
+.prog-bar{height:2px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;}
+.prog-fill{height:100%;background:var(--gold);border-radius:2px;transition:width 0.5s ease;width:0%;}
+.prog-pct{font-size:11px;color:var(--gold);margin-top:5px;font-weight:500;}
+
+nav{flex:1;padding:8px 0;}
+.nav-section{padding:12px 24px 3px;font-size:9px;letter-spacing:2.5px;color:rgba(255,255,255,0.2);text-transform:uppercase;}
+.nav-item{
+  display:flex;align-items:center;gap:11px;padding:10px 24px;cursor:pointer;
+  font-size:12.5px;color:var(--muted);transition:all 0.2s;
+  border-left:2px solid transparent;user-select:none;
+}
+.nav-item:hover:not(.locked){color:var(--white);background:var(--surface);}
+.nav-item.active{color:var(--white);border-left-color:var(--gold);background:var(--gold-pale);}
+.nav-item.done{color:rgba(255,255,255,0.55);}
+.nav-item.locked{opacity:0.25;cursor:not-allowed;}
+.step-dot{
+  width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.07);
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:700;flex-shrink:0;
+}
+.nav-item.active .step-dot{background:var(--gold);color:var(--black);}
+.nav-item.done .step-dot{background:var(--green);color:var(--white);}
+.nav-check{margin-left:auto;font-size:11px;color:var(--green-bright);}
+
+.sidebar-reset{padding:16px 24px;border-top:1px solid var(--border);}
+.reset-btn{
+  font-size:11px;color:rgba(255,255,255,0.25);background:none;border:none;
+  cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:underline;
+}
+.reset-btn:hover{color:rgba(255,255,255,0.5);}
+
+/* MAIN */
+#main{margin-left:260px;flex:1;display:flex;flex-direction:column;min-height:100vh;}
+.topbar{
+  background:var(--black);border-bottom:1px solid var(--border);
+  padding:14px 44px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:48px;z-index:50;
+}
+.topbar-label{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;}
+.topbar-title{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:1.5px;color:var(--white);margin-top:1px;}
+.badge{padding:5px 13px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;}
+.badge-gold{background:var(--gold-pale);color:var(--gold);border:1px solid var(--border-gold);}
+.badge-green{background:var(--green-pale);color:var(--green-bright);border:1px solid rgba(90,158,56,0.3);}
+.badge-sim{background:rgba(201,153,31,0.1);color:var(--gold-light);border:1px solid var(--border-gold);}
+
+/* CONTENT */
+.content{padding:40px 44px;max-width:820px;flex:1;}
+.module-hero{margin-bottom:32px;}
+.module-hero h1{font-family:'Bebas Neue',sans-serif;font-size:50px;letter-spacing:2px;line-height:1.0;color:var(--white);margin-bottom:10px;}
+.module-hero h1 span{color:var(--gold);}
+.module-hero p{font-size:14px;color:var(--muted);line-height:1.7;max-width:580px;}
+
+.card{background:var(--charcoal);border:1px solid var(--border);border-radius:10px;padding:24px 28px;margin-bottom:16px;}
+.card.gold-left{border-left:3px solid var(--gold);}
+.card.green-left{border-left:3px solid var(--green-bright);}
+.card h3{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--white);margin-bottom:9px;}
+.card p{font-size:13.5px;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:8px;}
+.card p:last-child{margin-bottom:0;}
+.card strong{color:var(--white);font-weight:500;}
+
+.spin-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:4px;}
+.spin-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:18px;}
+.spin-letter{font-family:'Bebas Neue',sans-serif;font-size:42px;line-height:1;color:var(--gold);}
+.spin-word{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.4);margin-bottom:6px;}
+.spin-desc{font-size:12.5px;color:rgba(255,255,255,0.55);line-height:1.5;}
+
+.msg-thread{background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:10px;padding:18px;margin:14px 0;}
+.platform-pill{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:4px;margin-bottom:14px;background:var(--gold-pale);color:var(--gold);border:1px solid var(--border-gold);}
+.msg{margin-bottom:9px;display:flex;flex-direction:column;}
+.msg.them{align-items:flex-start;}
+.msg.us{align-items:flex-end;}
+.msg-bubble{max-width:78%;padding:9px 13px;border-radius:14px;font-size:13px;line-height:1.5;}
+.them .msg-bubble{background:rgba(255,255,255,0.07);border:1px solid var(--border);color:rgba(255,255,255,0.82);border-bottom-left-radius:3px;}
+.us .msg-bubble{background:var(--green);color:var(--white);border-bottom-right-radius:3px;}
+.spin-tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:2px 8px;border-radius:3px;margin-top:5px;display:inline-block;}
+.tag-s{background:rgba(59,130,246,0.2);color:#93c5fd;}
+.tag-p{background:rgba(245,158,11,0.2);color:#fcd34d;}
+.tag-i{background:rgba(239,68,68,0.2);color:#fca5a5;}
+.tag-n{background:rgba(90,158,56,0.2);color:#86efac;}
+.tag-v{background:rgba(139,92,246,0.2);color:#c4b5fd;}
+.tag-c{background:rgba(201,153,31,0.2);color:var(--gold-light);}
+
+.practice-wrap{background:rgba(0,0,0,0.2);border:1px solid var(--border);border-radius:10px;padding:22px;margin:14px 0;}
+.practice-scenario{font-size:12px;color:var(--muted);margin-bottom:9px;font-style:italic;}
+.practice-prompt{font-size:14px;color:var(--white);font-weight:500;margin-bottom:14px;line-height:1.5;}
+.options{display:flex;flex-direction:column;gap:8px;}
+.opt{padding:11px 15px;border-radius:7px;border:1px solid var(--border);background:var(--surface);text-align:left;cursor:pointer;font-size:13px;color:rgba(255,255,255,0.7);font-family:'DM Sans',sans-serif;line-height:1.4;transition:all 0.2s;}
+.opt:hover:not(:disabled){border-color:var(--gold);background:var(--gold-pale);color:var(--white);}
+.opt.correct{border-color:var(--green-bright);background:var(--green-pale);color:#86efac;}
+.opt.wrong{border-color:#ef4444;background:rgba(239,68,68,0.08);color:#fca5a5;}
+.opt:disabled{pointer-events:none;}
+.feedback-box{display:none;margin-top:12px;padding:12px 15px;border-radius:7px;font-size:13px;line-height:1.5;}
+.feedback-box.show{display:block;}
+.feedback-box.good{background:rgba(90,158,56,0.1);border:1px solid rgba(90,158,56,0.3);color:#86efac;}
+.feedback-box.bad{background:rgba(239,68,68,0.07);border:1px solid rgba(239,68,68,0.3);color:#fca5a5;}
+
+.rule-list{list-style:none;margin:10px 0;}
+.rule-list li{font-size:13px;padding:8px 0;border-bottom:1px solid var(--border);color:rgba(255,255,255,0.6);display:flex;gap:11px;line-height:1.5;}
+.rule-list li:last-child{border-bottom:none;}
+.rule-list li::before{content:'—';color:var(--gold);flex-shrink:0;}
+
+.note{background:var(--gold-pale);border:1px solid var(--border-gold);border-radius:8px;padding:13px 17px;font-size:13px;color:rgba(255,255,255,0.65);line-height:1.5;margin:12px 0;}
+.note strong{color:var(--gold);}
+.section-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;}
+.divider{height:1px;background:var(--border);margin:22px 0;}
+
+.nav-btns{display:flex;gap:11px;margin-top:28px;padding-top:20px;border-top:1px solid var(--border);}
+.btn-primary{background:var(--gold);color:var(--black);border:none;border-radius:7px;padding:12px 26px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:0.5px;transition:background 0.2s;}
+.btn-primary:hover{background:var(--gold-light);}
+.btn-secondary{background:transparent;color:rgba(255,255,255,0.55);border:1px solid var(--border);border-radius:7px;padding:12px 26px;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.btn-secondary:hover{border-color:rgba(255,255,255,0.3);color:var(--white);}
+
+/* SIMULATOR */
+#mod-simulator{display:none;flex-direction:column;height:calc(100vh - 100px);}
+#mod-simulator.visible{display:flex;}
+#sim-wrap{display:flex;flex-direction:column;flex:1;padding:24px 44px;gap:16px;overflow:hidden;}
+.persona-select-area{overflow-y:auto;flex:1;}
+.persona-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:14px 0;}
+.persona-card{background:var(--charcoal);border:1.5px solid var(--border);border-radius:10px;padding:18px;cursor:pointer;transition:all 0.2s;}
+.persona-card:hover{border-color:var(--gold);background:var(--gold-pale);}
+.persona-card.selected{border-color:var(--gold);background:var(--gold-pale);}
+.p-name{font-weight:700;font-size:14px;margin-bottom:4px;color:var(--white);}
+.p-trait{font-size:12px;color:var(--muted);line-height:1.4;margin-bottom:9px;}
+.p-diff{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;}
+.diff-easy{color:var(--green-bright);}
+.diff-med{color:var(--gold);}
+.diff-hard{color:#f87171;}
+.platform-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:4px;}
+
+.chat-area{display:flex;flex-direction:column;flex:1;overflow:hidden;}
+.chat-header{background:var(--charcoal);border:1px solid var(--border);border-radius:10px 10px 0 0;padding:13px 18px;display:flex;align-items:center;gap:11px;flex-shrink:0;}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:15px;color:white;flex-shrink:0;}
+.prospect-name{font-weight:600;font-size:14px;color:var(--white);}
+.prospect-status{font-size:11px;color:var(--muted);}
+.stage-pill{margin-left:auto;padding:4px 12px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;background:var(--gold-pale);color:var(--gold);border:1px solid var(--border-gold);}
+
+.score-row{background:rgba(0,0,0,0.3);border-left:1px solid var(--border);border-right:1px solid var(--border);padding:9px 18px;display:flex;gap:24px;align-items:center;flex-shrink:0;}
+.sc-val{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold);}
+.sc-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);}
+
+.messages{flex:1;overflow-y:auto;padding:16px 18px;background:rgba(0,0,0,0.2);border-left:1px solid var(--border);border-right:1px solid var(--border);display:flex;flex-direction:column;gap:9px;}
+.sim-msg{display:flex;flex-direction:column;}
+.sim-msg.prospect{align-items:flex-start;}
+.sim-msg.user{align-items:flex-end;}
+.sim-bubble{max-width:74%;padding:9px 13px;border-radius:14px;font-size:13px;line-height:1.5;}
+.prospect .sim-bubble{background:rgba(255,255,255,0.07);border:1px solid var(--border);color:rgba(255,255,255,0.82);border-bottom-left-radius:3px;}
+.user .sim-bubble{background:var(--green);color:var(--white);border-bottom-right-radius:3px;}
+.fb-tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:2px 8px;border-radius:3px;margin-top:4px;display:inline-block;}
+.fb-tag.good{background:rgba(90,158,56,0.2);color:#86efac;}
+.fb-tag.ok{background:rgba(245,158,11,0.2);color:#fcd34d;}
+.fb-tag.miss{background:rgba(239,68,68,0.2);color:#fca5a5;}
+.typing{display:flex;align-items:center;gap:5px;padding:8px 13px;background:rgba(255,255,255,0.07);border:1px solid var(--border);border-radius:14px;border-bottom-left-radius:3px;width:fit-content;}
+.dot{width:5px;height:5px;background:var(--muted);border-radius:50%;animation:bop 1.2s infinite;}
+.dot:nth-child(2){animation-delay:0.2s;}
+.dot:nth-child(3){animation-delay:0.4s;}
+@keyframes bop{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
+
+.input-bar{background:var(--charcoal);border:1px solid var(--border);border-radius:0 0 10px 10px;padding:11px 14px;display:flex;gap:9px;align-items:flex-end;border-top:1px solid var(--border);flex-shrink:0;}
+.sim-input{flex:1;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:7px;padding:9px 13px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--white);resize:none;min-height:40px;max-height:100px;line-height:1.4;}
+.sim-input:focus{outline:none;border-color:var(--gold);}
+.sim-input::placeholder{color:rgba(255,255,255,0.2);}
+.send-btn{background:var(--gold);color:var(--black);border:none;border-radius:7px;padding:9px 17px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;flex-shrink:0;transition:background 0.2s;}
+.send-btn:hover:not(:disabled){background:var(--gold-light);}
+.send-btn:disabled{opacity:0.3;cursor:not-allowed;}
+
+/* TOAST */
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--charcoal);border:1px solid var(--border-gold);color:rgba(255,255,255,0.8);padding:10px 20px;border-radius:8px;font-size:13px;z-index:9999;pointer-events:none;transition:opacity 0.4s;white-space:nowrap;}
+
+.hidden{display:none!important;}
+
+
+/* ══ TAB SYSTEM ══ */
+#tab-bar{background:var(--black);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 0 0 260px;position:sticky;top:0;z-index:60;}
+.tab-btn{padding:14px 28px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-family:'DM Sans',sans-serif;cursor:pointer;border:none;background:transparent;color:var(--muted);border-bottom:2px solid transparent;transition:all 0.2s;}
+.tab-btn:hover{color:var(--white);}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+.tab-pane{display:none;}
+.tab-pane.active{display:block;}
+
+/* ══ COACH TAB STYLES ══ */
+
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --black:#0f0f0d;--dark:#1a1a16;--charcoal:#242420;
+  --gold:#c9991f;--gold-light:#e8b82a;--gold-pale:rgba(201,153,31,0.12);
+  --green:#3d6b28;--green-bright:#5a9e38;--green-pale:rgba(90,158,56,0.12);
+  --white:#fff;--muted:rgba(255,255,255,0.45);
+  --border:rgba(255,255,255,0.08);--border-gold:rgba(201,153,31,0.3);
+  --surface:rgba(255,255,255,0.04);
+}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--white);min-height:100vh;}
+#onboarding{position:fixed;inset:0;background:var(--black);z-index:999;display:flex;align-items:center;justify-content:center;}
+.ob-box{max-width:380px;width:90%;text-align:center;padding:40px 28px;}
+.ob-org{font-size:10px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+.ob-title{font-family:'Bebas Neue',sans-serif;font-size:46px;letter-spacing:2px;color:var(--white);line-height:1.0;margin-bottom:6px;}
+.ob-title span{color:var(--gold);}
+.ob-sub{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:26px;}
+.ob-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);display:block;text-align:left;margin-bottom:7px;}
+.ob-input{width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:12px 15px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--white);outline:none;margin-bottom:14px;transition:border-color 0.2s;}
+.ob-input:focus{border-color:var(--gold);}
+.ob-input::placeholder{color:rgba(255,255,255,0.2);}
+.ob-btn{width:100%;background:var(--gold);color:var(--black);border:none;border-radius:8px;padding:13px;font-size:13px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background 0.2s;}
+.ob-btn:hover:not(:disabled){background:var(--gold-light);}
+.ob-btn:disabled{opacity:0.3;cursor:not-allowed;}
+.ob-note{font-size:11px;color:rgba(255,255,255,0.18);margin-top:12px;}
+header{background:var(--black);border-bottom:1px solid var(--border);padding:14px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
+.header-brand{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:var(--white);}
+.header-brand span{color:var(--gold);}
+.header-tool{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:2px;}
+.header-user{font-size:12px;color:var(--muted);}
+.header-user span{color:var(--gold);font-weight:500;}
+.page{max-width:860px;margin:0 auto;padding:36px 40px 60px;}
+.section-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px;}
+.platform-row{display:flex;gap:8px;margin-bottom:28px;}
+.plat-btn{padding:7px 16px;border-radius:6px;border:1px solid var(--border);background:var(--surface);font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.plat-btn:hover{color:var(--white);border-color:rgba(255,255,255,0.2);}
+.plat-btn.active{border-color:var(--gold);background:var(--gold-pale);color:var(--gold);}
+.input-toggle{display:flex;gap:0;margin-bottom:20px;border:1px solid var(--border);border-radius:9px;overflow:hidden;width:fit-content;}
+.toggle-btn{padding:10px 24px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all 0.2s;}
+.toggle-btn.active{background:var(--gold);color:var(--black);}
+.toggle-btn:hover:not(.active){color:var(--white);}
+.upload-zone{border:2px dashed rgba(255,255,255,0.12);border-radius:12px;padding:40px 24px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:14px;position:relative;}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--gold);background:var(--gold-pale);}
+.upload-icon{font-size:32px;margin-bottom:10px;display:block;}
+.upload-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px;}
+.upload-sub{font-size:12px;color:var(--muted);margin-top:4px;}
+.upload-sub span{color:var(--gold);text-decoration:underline;}
+#file-input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.screenshots-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-bottom:14px;}
+.screenshot-item{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--border);}
+.screenshot-item img{width:100%;height:90px;object-fit:cover;display:block;}
+.screenshot-remove{position:absolute;top:4px;right:4px;background:rgba(0,0,0,0.75);border:none;color:var(--white);border-radius:50%;width:20px;height:20px;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;}
+.add-more-btn{border:2px dashed rgba(255,255,255,0.12);border-radius:8px;height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s;background:none;font-family:'DM Sans',sans-serif;color:var(--muted);font-size:11px;gap:4px;position:relative;}
+.add-more-btn:hover{border-color:var(--gold);color:var(--gold);}
+.add-more-btn input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.field-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:7px;display:block;}
+.field-textarea{width:100%;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:8px;padding:13px 15px;font-size:13.5px;font-family:'DM Sans',sans-serif;color:var(--white);resize:vertical;min-height:180px;line-height:1.6;transition:border-color 0.2s;}
+.field-textarea:focus{outline:none;border-color:var(--gold);}
+.field-textarea::placeholder{color:rgba(255,255,255,0.18);}
+.field-textarea.small{min-height:70px;}
+.paste-hint{font-size:12px;color:var(--muted);margin-top:8px;margin-bottom:20px;line-height:1.5;}
+.paste-hint strong{color:rgba(255,255,255,0.55);}
+.analyse-btn{width:100%;background:var(--gold);color:var(--black);border:none;border-radius:8px;padding:14px;font-size:14px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background 0.2s;letter-spacing:0.5px;margin-top:20px;}
+.analyse-btn:hover:not(:disabled){background:var(--gold-light);}
+.analyse-btn:disabled{opacity:0.3;cursor:not-allowed;}
+#loading{display:none;text-align:center;padding:60px 20px;}
+.loading-dots{display:flex;justify-content:center;gap:7px;margin-bottom:16px;}
+.ld{width:9px;height:9px;background:var(--gold);border-radius:50%;animation:bop 1.2s infinite;}
+.ld:nth-child(2){animation-delay:0.2s;}
+.ld:nth-child(3){animation-delay:0.4s;}
+@keyframes bop{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-7px)}}
+.loading-text{font-size:13px;color:var(--muted);}
+.loading-sub{font-size:12px;color:rgba(255,255,255,0.2);margin-top:6px;}
+#results{display:none;}
+.result-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.chip{padding:5px 14px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+.chip-good{background:var(--green-pale);color:var(--green-bright);border:1px solid rgba(90,158,56,0.3);}
+.chip-ok{background:rgba(245,158,11,0.1);color:#fcd34d;border:1px solid rgba(245,158,11,0.3);}
+.chip-miss{background:rgba(239,68,68,0.1);color:#fca5a5;border:1px solid rgba(239,68,68,0.3);}
+.chip-stage{background:var(--gold-pale);color:var(--gold);border:1px solid var(--border-gold);}
+.chip-neutral{background:var(--surface);color:var(--muted);border:1px solid var(--border);}
+.result-card{background:var(--charcoal);border:1px solid var(--border);border-radius:10px;padding:22px 26px;margin-bottom:14px;}
+.result-card.gold{border-left:3px solid var(--gold);}
+.result-card.green{border-left:3px solid var(--green-bright);}
+.result-card.amber{border-left:3px solid #f59e0b;}
+.result-card.red{border-left:3px solid #ef4444;}
+.result-card h3{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;color:var(--white);margin-bottom:10px;}
+.result-card p{font-size:13.5px;color:rgba(255,255,255,0.65);line-height:1.75;}
+.msg-breakdown{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.msg-row{border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.msg-row-header{display:flex;align-items:center;justify-content:space-between;padding:8px 13px;background:rgba(0,0,0,0.2);}
+.msg-sender{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+.msg-sender.them{color:rgba(255,255,255,0.35);}
+.msg-sender.you{color:var(--green-bright);}
+.msg-body{padding:10px 13px;font-size:13px;line-height:1.5;color:rgba(255,255,255,0.75);border-top:1px solid var(--border);}
+.msg-coaching{padding:8px 13px;font-size:12px;line-height:1.5;border-top:1px solid var(--border);}
+.msg-coaching.good{background:rgba(90,158,56,0.08);color:#86efac;}
+.msg-coaching.ok{background:rgba(245,158,11,0.07);color:#fcd34d;}
+.msg-coaching.miss{background:rgba(239,68,68,0.07);color:#fca5a5;}
+.msg-tag{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:2px 7px;border-radius:3px;margin-right:5px;margin-bottom:4px;}
+.tag-good{background:rgba(90,158,56,0.2);color:#86efac;}
+.tag-ok{background:rgba(245,158,11,0.15);color:#fcd34d;}
+.tag-miss{background:rgba(239,68,68,0.15);color:#fca5a5;}
+.improved-block{background:rgba(0,0,0,0.3);border:1px solid rgba(90,158,56,0.25);border-radius:8px;padding:16px 18px;margin-top:10px;}
+.improved-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--green-bright);margin-bottom:8px;}
+.improved-text{font-size:13.5px;color:rgba(255,255,255,0.85);line-height:1.6;}
+.copy-btn{margin-top:10px;background:transparent;border:1px solid rgba(90,158,56,0.35);color:var(--green-bright);border-radius:6px;padding:6px 14px;font-size:11px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;}
+.copy-btn:hover{background:var(--green-pale);}
+.submit-block{background:var(--gold-pale);border:1px solid var(--border-gold);border-radius:10px;padding:20px 24px;margin-top:20px;}
+.submit-block h3{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold);margin-bottom:6px;}
+.submit-block p{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:14px;}
+.submit-row{display:flex;gap:10px;flex-wrap:wrap;}
+.submit-btn{background:var(--gold);color:var(--black);border:none;border-radius:7px;padding:10px 22px;font-size:13px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:background 0.2s;}
+.submit-btn:hover:not(:disabled){background:var(--gold-light);}
+.submit-btn:disabled{opacity:0.4;cursor:not-allowed;}
+.skip-btn{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:10px 22px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.2s;}
+.skip-btn:hover{color:var(--white);}
+.submit-success{display:none;font-size:13px;color:var(--green-bright);padding:10px 0;}
+.submit-error{display:none;font-size:13px;color:#fca5a5;padding:10px 0;}
+.new-btn{width:100%;background:transparent;border:1px solid var(--border);color:rgba(255,255,255,0.4);border-radius:8px;padding:12px;font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;margin-top:10px;transition:all 0.2s;}
+.new-btn:hover{color:var(--white);border-color:rgba(255,255,255,0.2);}
+.hidden{display:none!important;}
+
+
+/* Coach page wrapper inside tab */
+.coach-page{max-width:860px;margin:0 auto;padding:36px 40px 60px;}
+
+</style>
+</head>
+<body>
+
+<!-- ONBOARDING -->
+<div id="onboarding">
+  <div class="ob-box">
+    <div class="ob-org">Inspiring Me CIC</div>
+    <div class="ob-title">SALES<br><span>TRAINING.</span></div>
+    <p class="ob-sub">Your personal sales training hub. Learn the method, practise live conversations, and get coached on real ones. Progress saves automatically.</p>
+    <label class="ob-label">Your first name</label>
+    <input class="ob-input" id="name-input" type="text" placeholder="e.g. Jordan" maxlength="30"
+      onkeydown="if(event.key==='Enter')startApp()"
+      oninput="document.getElementById('ob-btn').disabled=this.value.trim().length<1">
+    <button class="ob-btn" id="ob-btn" onclick="startApp()" disabled>Let's Go →</button>
+    <p class="ob-note">Only your first name is stored. Nothing else is collected.</p>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<div id="sidebar">
+
+  <div class="logo-block">
+    <div class="logo-brand">INSPIRING <span>ME</span></div>
+    <div class="logo-sub">Sales Training</div>
+    <div class="logo-user hidden" id="logo-user">Hey, <span id="logo-name"></span> 👋</div>
+  </div>
+  <div class="prog-block">
+    <div class="prog-label">Progress</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+    <div class="prog-pct" id="prog-pct">0% complete</div>
+  </div>
+  <nav>
+    <div class="nav-section">Foundation</div>
+    <div class="nav-item active" data-mod="intro" onclick="goModule('intro')"><div class="step-dot">1</div>What is SPIN?</div>
+    <div class="nav-item locked" data-mod="programme" onclick="goModule('programme')"><div class="step-dot">2</div>Know the Programme</div>
+    <div class="nav-section">The SPIN Framework</div>
+    <div class="nav-item locked" data-mod="situation" onclick="goModule('situation')"><div class="step-dot">S</div>Situation Questions</div>
+    <div class="nav-item locked" data-mod="problem" onclick="goModule('problem')"><div class="step-dot">P</div>Problem Questions</div>
+    <div class="nav-item locked" data-mod="implication" onclick="goModule('implication')"><div class="step-dot">I</div>Implication Questions</div>
+    <div class="nav-item locked" data-mod="need" onclick="goModule('need')"><div class="step-dot">N</div>Need-Payoff Questions</div>
+    <div class="nav-section">Closing the Deal</div>
+    <div class="nav-item locked" data-mod="value" onclick="goModule('value')"><div class="step-dot">7</div>Building Value</div>
+    <div class="nav-item locked" data-mod="close" onclick="goModule('close')"><div class="step-dot">8</div>The Close</div>
+    <div class="nav-item locked" data-mod="objections" onclick="goModule('objections')"><div class="step-dot">9</div>Objection Handling</div>
+    <div class="nav-section">Live Practice</div>
+    <div class="nav-item locked" data-mod="simulator" onclick="goModule('simulator')"><div class="step-dot">★</div>Live Conversation Sim</div>
+  </nav>
+  <div class="sidebar-reset">
+    <button class="reset-btn" onclick="confirmReset()">Reset my progress</button>
+  </div>
+
+</div>
+
+<!-- TAB BAR -->
+<div id="tab-bar">
+  <button class="tab-btn active" id="tab-training" onclick="switchTab('training')">📚 Training</button>
+  <button class="tab-btn" id="tab-coach" onclick="switchTab('coach')">💬 Conversation Coach</button>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+  <!-- TRAINING TAB -->
+  <div id="pane-training" class="tab-pane active">
+
+  <div class="topbar">
+    <div>
+      <div class="topbar-label" id="tb-label">Module 1</div>
+      <div class="topbar-title" id="tb-title">What is SPIN Selling?</div>
+    </div>
+    <span class="badge badge-gold" id="tb-badge">Foundation</span>
+  </div>
+
+  <!-- MODULE 1: INTRO -->
+  <div id="mod-intro" class="content">
+    <div class="module-hero">
+      <h1>SPIN.<br><span>THE METHOD THAT WORKS.</span></h1>
+      <p>You're not here to push a product. You're here to have a real conversation — and let the other person talk themselves into joining. That's what SPIN is. It's how the best salespeople operate, and it's what you're going to learn.</p>
+    </div>
+    <div class="card gold-left">
+      <h3>Why typed sales is different</h3>
+      <p>On LinkedIn, Snapchat, WhatsApp — you can't use your voice or body language. All you've got is words on a screen. That means <strong>every message has to work harder.</strong> No fluff. No essays. Ask smart questions, listen carefully, then speak to exactly what they told you.</p>
+    </div>
+    <div class="section-tag">The Framework</div>
+    <div class="spin-grid">
+      <div class="spin-box"><div class="spin-letter">S</div><div class="spin-word">Situation</div><div class="spin-desc">Find out where they're at right now. School, future plans, what they're working towards.</div></div>
+      <div class="spin-box"><div class="spin-letter" style="color:var(--gold-light)">P</div><div class="spin-word">Problem</div><div class="spin-desc">Surface the gap. No experience, no CV, no idea how to stand out. Let them say it.</div></div>
+      <div class="spin-box"><div class="spin-letter" style="color:#f87171">I</div><div class="spin-word">Implication</div><div class="spin-desc">Make the gap feel real. What happens if they don't fix it? What are they actually risking?</div></div>
+      <div class="spin-box"><div class="spin-letter" style="color:#86efac">N</div><div class="spin-word">Need-Payoff</div><div class="spin-desc">Let them describe the ideal solution. Then show that's exactly what Inspiring Me offers.</div></div>
+    </div>
+    <div class="divider"></div>
+    <div class="card">
+      <h3>The golden rule</h3>
+      <p><strong>Never pitch until the gap is surfaced.</strong> If you talk about the programme before they've told you what they're missing — you're just another cold message they'll ignore. SPIN earns you the right to pitch.</p>
+    </div>
+    <div class="card gold-left">
+      <h3>Message rules — always</h3>
+      <ul class="rule-list">
+        <li>Keep it under 3 lines. If it's longer, cut it.</li>
+        <li>One question per message. Two questions = no answer.</li>
+        <li>No jargon, no corporate speak. Talk like yourself.</li>
+        <li>End every message with an easy question or a soft next step.</li>
+        <li>Don't pitch the programme until they've told you what they need.</li>
+        <li>Acknowledge what they say before you move on.</li>
+      </ul>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-primary" onclick="completeAndGo('intro','programme')">Next: Know the Programme →</button>
+    </div>
+  </div>
+
+  <!-- MODULE 2: PROGRAMME -->
+  <div id="mod-programme" class="content hidden">
+    <div class="module-hero">
+      <h1>KNOW WHAT<br><span>YOU'RE SELLING.</span></h1>
+      <p>Before you can sell it, you need to know it inside out. Here's everything you need about Inspiring Me CIC.</p>
+    </div>
+    <div class="card green-left">
+      <h3>What is Inspiring Me CIC?</h3>
+      <p>A work experience programme for young people aged 16–25 across the UK. Participants get hands-on experience in <strong>field sales, fundraising, and communications</strong> — building real skills that actually show up on a CV and get recruiters' attention.</p>
+      <p>It runs on weekends. Sessions are in-person, with personal development delivered online each week.</p>
+    </div>
+    <div class="card gold-left">
+      <h3>What do they actually do?</h3>
+      <ul class="rule-list">
+        <li>Sell the Inspiring Me magazine in their community — door to door, at events, online. All sales count.</li>
+        <li>Complete an online self-development module each week and update their LinkedIn profile.</li>
+        <li>Build a professional LinkedIn presence that actually gets noticed.</li>
+        <li>Graduate with a certified qualification — real proof on their CV.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>What's in it for them?</h3>
+      <ul class="rule-list">
+        <li>Real CV experience — actual field sales results, not just "assisted with admin."</li>
+        <li>A professional LinkedIn profile built and live by the end.</li>
+        <li>A certificate they can point to in interviews.</li>
+        <li>Skills: cold approach, objection handling, closing, communication — all transferable.</li>
+        <li>They earn as they go — based on what they do.</li>
+      </ul>
+    </div>
+    <div class="note"><strong>On pay:</strong> Mention it once max — never stress it, never lead with it. The skills and CV value is the headline. If they ask directly: "yes, it's a programme where you earn based on what you put in." Then move on.</div>
+    <div class="card gold-left">
+      <h3>Fast-track pay</h3>
+      <p>Complete the self-development task early → get paid on Monday instead of Friday. That's the incentive to stay on top of the online side.</p>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-secondary" onclick="goModule('intro')">← Back</button>
+      <button class="btn-primary" onclick="completeAndGo('programme','situation')">Next: Situation Questions →</button>
+    </div>
+  </div>
+
+  <!-- MODULE 3: SITUATION -->
+  <div id="mod-situation" class="content hidden">
+    <div class="module-hero">
+      <h1>S — SITUATION.<br><span>UNDERSTAND THEM FIRST.</span></h1>
+      <p>Situation questions build the picture. You're not interrogating — you're showing genuine interest. Find out where they're at before anything else.</p>
+    </div>
+    <div class="card gold-left">
+      <h3>What you're trying to learn</h3>
+      <ul class="rule-list">
+        <li>Are they in school, college, or working?</li>
+        <li>What are they trying to do next — uni, apprenticeship, job?</li>
+        <li>Have they got any work experience already?</li>
+        <li>What kind of careers are they thinking about?</li>
+      </ul>
+    </div>
+    <div class="section-tag">Real example — LinkedIn</div>
+    <div class="msg-thread">
+      <span class="platform-pill">LinkedIn</span>
+      <div class="msg us"><div class="msg-bubble">Hey — saw you're studying at Harris Academy, hope you don't mind me reaching out. Are you in Year 12 or 13 right now?</div><span class="spin-tag tag-s">S — opening situation question</span></div>
+      <div class="msg them"><div class="msg-bubble">Hey! Yeah Year 12. Why?</div></div>
+      <div class="msg us"><div class="msg-bubble">Nice one. What are you thinking of doing after — uni, work, something else?</div><span class="spin-tag tag-s">S — follow-up situation</span></div>
+      <div class="msg them"><div class="msg-bubble">Probably uni, maybe property or estate management. Not fully sure yet though</div></div>
+    </div>
+    <div class="card">
+      <h3>What just happened?</h3>
+      <p>Two short messages. We know their year group, their rough direction, and there's a natural opening. They're engaged. We didn't mention the programme once — and that's exactly right.</p>
+    </div>
+    <div class="card gold-left">
+      <h3>Good vs bad situation questions</h3>
+      <ul class="rule-list">
+        <li><strong>Good:</strong> "Are you in sixth form or college?" — specific, easy to answer</li>
+        <li><strong>Good:</strong> "What are you thinking of doing after school?" — open, not pushy</li>
+        <li><strong>Bad:</strong> "Are you looking for work experience?" — you've jumped ahead</li>
+        <li><strong>Bad:</strong> "Would you be interested in a paid opportunity?" — pitched before earning it</li>
+      </ul>
+    </div>
+    <div class="section-tag">Practice</div>
+    <div class="practice-wrap">
+      <div class="practice-scenario">You've just connected with someone on LinkedIn. Their profile says they're in Year 13, interested in civil engineering. First message.</div>
+      <div class="practice-prompt">Which is the best opening Situation question?</div>
+      <div class="options">
+        <button class="opt" onclick="checkAnswer(this,false,'q1','Too much, too soon. You\'ve introduced the programme before finding out anything about them.')">Hey! I work with a programme that gives young people real sales experience and a certificate — would you be interested?</button>
+        <button class="opt" onclick="checkAnswer(this,true,'q1','Exactly right. Simple, personal, one question, no agenda shown yet. They\'ll answer this.')">Hey — saw civil engineering on your profile, that\'s a solid path. Are you in your final year or have you just finished?</button>
+        <button class="opt" onclick="checkAnswer(this,false,'q1','You\'ve asked two things at once. People almost always answer the easier one and ignore the other. Split them up.')">Hi! What are your future plans and do you have any work experience already?</button>
+      </div>
+      <div class="feedback-box" id="fb-q1"></div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-secondary" onclick="goModule('programme')">← Back</button>
+      <button class="btn-primary" onclick="completeAndGo('situation','problem')">Next: Problem Questions →</button>
+    </div>
+  </div>
+
+  <!-- MODULE 4: PROBLEM -->
+  <div id="mod-problem" class="content hidden">
+    <div class="module-hero">
+      <h1>P — PROBLEM.<br><span>FIND THE GAP.</span></h1>
+      <p>Problem questions surface what they're struggling with. The gap between where they are and where they want to be. You don't create this — it's already there. Help them say it out loud.</p>
+    </div>
+    <div class="card gold-left">
+      <h3>Common gaps for young people</h3>
+      <ul class="rule-list">
+        <li>No work experience on their CV — everyone asks for it, nobody gives it.</li>
+        <li>Don't know how to stand out when applying for jobs or uni.</li>
+        <li>LinkedIn profile is either empty or barely there.</li>
+        <li>Want to go into business, sales, or comms — but have nothing to show for it yet.</li>
+        <li>Tried to get work experience but couldn't find anything real or relevant.</li>
+      </ul>
+    </div>
+    <div class="section-tag">Real example — continuing the conversation</div>
+    <div class="msg-thread">
+      <span class="platform-pill">LinkedIn</span>
+      <div class="msg them"><div class="msg-bubble">Probably uni, maybe property or estate management. Not fully sure yet though</div></div>
+      <div class="msg us"><div class="msg-bubble">Makes sense — have you managed to get any experience yet in that kind of area, or is that something you're still trying to figure out?</div><span class="spin-tag tag-p">P — surfacing the problem</span></div>
+      <div class="msg them"><div class="msg-bubble">Not really no. It's hard to find anything that's actually useful, most things are just shadowing or unpaid</div></div>
+      <div class="msg us"><div class="msg-bubble">Yeah that's a really common thing to be honest. Is that something that feels like it's holding you back at all?</div><span class="spin-tag tag-p">P — deepening the problem</span></div>
+    </div>
+    <div class="card">
+      <h3>Key move</h3>
+      <p>They said it themselves: "hard to find anything actually useful." You didn't put those words in their mouth. When the problem comes from them — it's real. That's the foundation everything else sits on.</p>
+    </div>
+    <div class="section-tag">Practice</div>
+    <div class="practice-wrap">
+      <div class="practice-scenario">They've just told you they're finishing Year 13 and want to go into civil engineering. They mentioned struggling to find relevant work experience.</div>
+      <div class="practice-prompt">What's the best Problem question to follow up with?</div>
+      <div class="options">
+        <button class="opt" onclick="checkAnswer(this,false,'q2','You\'ve jumped straight into solution mode. They haven\'t fully articulated the gap yet — slow down.')">That's exactly what we help with — we give young people real experience. Want to hear more?</button>
+        <button class="opt" onclick="checkAnswer(this,false,'q2','Not bad, but it\'s a yes/no that might shut the conversation down. You want them to explain it in their own words.')">Do you feel like you\'re behind compared to other people applying for the same things?</button>
+        <button class="opt" onclick="checkAnswer(this,true,'q2','Great. Open question, no agenda, lets them tell you exactly what the gap feels like.')">That sounds frustrating — what\'s been the main barrier, like is it finding opportunities or is it something else?</button>
+      </div>
+      <div class="feedback-box" id="fb-q2"></div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-secondary" onclick="goModule('situation')">← Back</button>
+      <button class="btn-primary" onclick="completeAndGo('problem','implication')">Next: Implication Questions →</button>
+    </div>
+  </div>
+
+  <!-- MODULE 5: IMPLICATION -->
+  <div id="mod-implication" class="content hidden">
+    <div class="module-hero">
+      <h1>I — IMPLICATION.<br><span>MAKE IT REAL.</span></h1>
+      <p>Implication questions make the problem feel urgent. Not by scaring them — by helping them think through what not fixing it actually means. This is the bit most people skip. Don't.</p>
+    </div>
+    <div class="card gold-left">
+      <h3>What you're doing here</h3>
+      <p>You're connecting their problem (no experience) to a consequence they care about (can't get the job, doesn't stand out, rejected). <strong>They need to feel it, not just know it.</strong></p>
+    </div>
+    <div class="section-tag">Real example</div>
+    <div class="msg-thread">
+      <span class="platform-pill">LinkedIn</span>
+      <div class="msg them"><div class="msg-bubble">I've tried applying but most placements want you to already have experience, it's like a catch 22</div></div>
+      <div class="msg us"><div class="msg-bubble">Yeah that catch-22 is real. And with that field being competitive — do you feel like not having anything on the CV yet could affect your options when you start applying properly?</div><span class="spin-tag tag-i">I — implication of the gap</span></div>
+      <div class="msg them"><div class="msg-bubble">Yeah honestly a bit worried about it. Like everyone else will have something and I won't</div></div>
+    </div>
+    <div class="card">
+      <h3>What just happened</h3>
+      <p>They said "a bit worried." You didn't tell them to be worried — you asked a question that helped them connect the dots. Now the problem has stakes. That's when people are genuinely ready to hear a solution.</p>
+    </div>
+    <div class="note"><strong>Important:</strong> One strong implication question is enough. You're not trying to make them feel bad — you're helping them see the situation clearly.</div>
+    <div class="section-tag">Practice</div>
+    <div class="practice-wrap">
+      <div class="practice-scenario">They're in their first year at college, want to go into marketing. They've told you they have no real experience and their LinkedIn is empty.</div>
+      <div class="practice-prompt">Which implication question works best?</div>
+      <div class="options">
+        <button class="opt" onclick="checkAnswer(this,false,'q3','This is still a problem question — you\'re surfacing the gap, not exploring what it means for their future.')">So you haven't really done anything professional yet?</button>
+        <button class="opt" onclick="checkAnswer(this,true,'q3','Perfect. You\'ve connected the empty LinkedIn to a real consequence — without being harsh.')">Marketing is competitive — do you feel like when employers Google you and find nothing, that could actually count against you?</button>
+        <button class="opt" onclick="checkAnswer(this,false,'q3','Too much — this feels like a lecture. Implication should come from a question, not a statement.')">If you don\'t sort your CV and LinkedIn now you\'ll really struggle. A lot of people miss out because of this.</button>
+      </div>
+      <div class="feedback-box" id="fb-q3"></div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-secondary" onclick="goModule('problem')">← Back</button>
+      <button class="btn-primary" onclick="completeAndGo('implication','need')">Next: Need-Payoff →</button>
+    </div>
+  </div>
+
+  <!-- MODULE 6: NEED-PAYOFF -->
+  <div id="mod-need" class="content hidden">
+    <div class="module-hero">
+      <h1>N — NEED-PAYOFF.<br><span>LET THEM SELL IT TO THEMSELVES.</span></h1>
+      <p>Need-Payoff questions get the other person to describe exactly what would solve their problem. Then you show them that's what Inspiring Me does.</p>
+    </div>
+    <div class="card gold-left">
+      <h3>The principle</h3>
+      <p>When someone says "I wish I could find something that gives me real experience and looks good on my CV" — and then you show them Inspiring Me does exactly that — they've basically convinced themselves. <strong>You didn't push them. They pulled themselves.</strong></p>
+    </div>
+    <div class="section-tag">Real example</div>
+    <div class="msg-thread">
+      <span class="platform-pill">LinkedIn</span>
+      <div class="msg them"><div class="msg-bubble">Yeah honestly a bit worried about it. Like everyone else will have something and I won't</div></div>
+      <div class="msg us"><div class="msg-bubble">Makes sense. If you could find something that gave you actual practical experience — something that would show up properly on a CV — would that be useful to you right now?</div><span class="spin-tag tag-n">N — need-payoff question</span></div>
+      <div class="msg them"><div class="msg-bubble">Yeah 100% — something that's actually worth putting on there, not just shadowing</div></div>
+      <div class="msg us"><div class="msg-bubble">That's exactly what I wanted to talk to you about actually — there's a programme that gives you real field sales experience, a built LinkedIn profile, and a certificate. All of it counts. Worth a quick look?</div><span class="spin-tag tag-n">N → bridge to programme</span></div>
+    </div>
+    <div class="card">
+      <h3>The bridge line</h3>
+      <p>"That's exactly what I wanted to talk to you about actually" — this is your bridge. You've waited until they've described the solution themselves. Now when you introduce Inspiring Me, it's not a pitch. It's an answer.</p>
+    </div>
+    <div class="section-tag">Practice</div>
+    <div class="practice-wrap">
+      <div class="practice-scenario">They've said they want something that proves they can communicate and handle pressure. Going into law, knows they need more than just grades.</div>
+      <div class="practice-prompt">Which is the best Need-Payoff question?</div>
+      <div class="options">
+        <button class="opt" onclick="checkAnswer(this,false,'q4','You\'re jumping into the pitch before letting them articulate the ideal solution. Earn the pitch first.')">We actually have something perfect for you — field sales experience and a LinkedIn profile build. Sound good?</button>
+        <button class="opt" onclick="checkAnswer(this,true,'q4','Spot on. They\'re about to describe exactly what Inspiring Me offers. When you introduce it, they\'ll feel like you read their mind.')">If you found something that gave you real evidence of communication and resilience — not just on paper, but something you could actually talk to in an interview — would that move the needle for you?</button>
+        <button class="opt" onclick="checkAnswer(this,false,'q4','This repeats the problem rather than asking about the ideal solution. Forward-focus here.')">So you feel like grades alone won\'t be enough?</button>
+      </div>
+      <div class="feedback-box" id="fb-q4"></div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-secondary" onclick="goModule('implication')">← Back</button>
+      <button class="btn-primary" onclick="completeAndGo('need','value')">Next: Building Value →</button>
+    </div>
+  </div>
+
+  <!-- MODULE 7: VALUE -->
+  <div id="mod-value" class="content hidden">
+    <div class="module-hero">
+      <h1>BUILDING<br><span>VALUE.</span></h1>
+      <p>Once you've introduced the programme, you don't dump all the information. You connect each part directly to what they told you they needed. That's how value is built.</p>
+    </div>
+    <div class="card gold-left">
+      <h3>The rule</h3>
+      <p>Every feature you mention must be attached to their specific situation. <strong>Feature → their benefit.</strong> Not a list — a conversation. Match what the programme offers to what they said they were missing.</p>
+    </div>
+    <div class="card">
+      <h3>Feature → Benefit</h3>
+      <ul class="rule-list">
+        <li><strong>Field sales experience</strong> → "Real experience you can talk to in interviews — not just shadowing"</li>
+        <li><strong>LinkedIn profile build</strong> → "By the end you've got a profile that actually gets noticed by recruiters"</li>
+        <li><strong>Certificate</strong> → "Proof that goes on your CV — not just something you say, something you can show"</li>
+        <li><strong>Weekend programme</strong> → "Fits around school or college — you don't have to drop anything"</li>
+        <li><strong>Online self-development</strong> → "Each week you're adding something new to your LinkedIn — you can see it building"</li>
+      </ul>
+    </div>
+    <div class="section-tag">Real example — building value</div>
+    <div class="msg-thread">
+      <span class="platform-pill">WhatsApp</span>
+      <div class="msg them"><div class="msg-bubble">Yeah I mean if it's legit I'd be interested but I've seen a lot of these things that don't really lead anywhere</div></div>
+      <div class="msg us"><div class="msg-bubble">That's fair — and I get the scepticism. What makes this different is it's an actual registered CIC. And you said you wanted something that'd actually show up on a CV — the certificate and the LinkedIn build are both tangible. You'd leave with things you can point to.</div><span class="spin-tag tag-v">V — value built from their concern</span></div>
+      <div class="msg them"><div class="msg-bubble">Ok that does sound better. What's it actually involve day to day?</div></div>
+      <div class="msg us"><div class="msg-bubble">So weekends you're out doing face-to-face sales — selling the Inspiring Me magazine in your area. That's where you get the experience. Then during the week there's a quick online module — that's the self-dev side, keeps the LinkedIn moving. Fits around whatever you've got on.</div><span class="spin-tag tag-v">V — matched to their schedule concern</span></div>
+    </div>
+    <div class="note"><strong>On earning:</strong> If it comes up naturally, say "yes it's a programme where you earn based on what you put in." Say it once, move on. Never make it the headline.</div>
+    <div class="section-tag">Practice</div>
+    <div class="practice-wrap">
+      <div class="practice-scenario">They've said they want something that actually proves they can communicate, and they're worried about CV gaps going into nursing applications.</div>
+      <div class="practice-prompt">You're building value. Which response works best?</div>
+      <div class="options">
+        <button class="opt" onclick="checkAnswer(this,false,'q5','This is a features dump — not connected to what they specifically told you they needed. Reads like a leaflet.')">So we offer field sales experience, LinkedIn profile building, a certificate, self-development modules, and it runs on weekends. Really worth checking out.</button>
+        <button class="opt" onclick="checkAnswer(this,true,'q5','This directly links each element to what they said. They\'ll feel like you actually listened. That builds trust fast.')">Because you mentioned the CV gap and wanting to show you can communicate — the field sales side is where that gets built. You\'re actually doing it, not just watching. And the certificate gives you something concrete to point to in your application.</button>
+        <button class="opt" onclick="checkAnswer(this,false,'q5','Too vague — doesn\'t connect to their specific situation. Be precise.')">It teaches you a lot of useful things, definitely worth looking into.</button>
+      </div>
+      <div class="feedback-box" id="fb-q5"></div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-secondary" onclick="goModule('need')">← Back</button>
+      <button class="btn-primary" onclick="completeAndGo('value','close')">Next: The Close →</button>
+    </div>
+  </div>
+
+  <!-- MODULE 8: CLOSE -->
+  <div id="mod-close" class="content hidden">
+    <div class="module-hero">
+      <h1>THE<br><span>CLOSE.</span></h1>
+      <p>The close isn't a pressure moment — it's a natural next step. If you've done SPIN properly, closing feels easy. You're just helping them take an action they already want to take.</p>
+    </div>
+    <div class="card gold-left">
+      <h3>When to close</h3>
+      <ul class="rule-list">
+        <li>They've said the programme sounds good, or asked for more info.</li>
+        <li>They've described exactly what Inspiring Me offers as what they need.</li>
+        <li>Objections have been handled and they're still engaged.</li>
+        <li>They haven't said no — they've just not said yes yet.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>How to close — typed</h3>
+      <p>Keep it light. One clear next step. The form link is your close. Don't make it feel like a big commitment — frame it as "just taking a look" or "getting your details in."</p>
+    </div>
+    <div class="section-tag">Close lines that work</div>
+    <div class="card gold-left">
+      <ul class="rule-list">
+        <li>"If it sounds like it could work, best thing is just fill in the short form — takes 2 minutes: [link]"</li>
+        <li>"Want to get your details in? It's just a quick application, no pressure: [link]"</li>
+        <li>"Worth putting yourself forward — worst case you find out it's not for you. Here's the form: [link]"</li>
+        <li>"Easiest next step is just getting your details in — we can go from there: [link]"</li>
+      </ul>
+    </div>
+    <div class="section-tag">Real example — the close</div>
+    <div class="msg-thread">
+      <span class="platform-pill">LinkedIn</span>
+      <div class="msg them"><div class="msg-bubble">Ok that sounds actually really good. How do I find out more?</div></div>
+      <div class="msg us"><div class="msg-bubble">Best thing is just to put your details in — it's a short form, takes 2 mins. Once you're in the system someone can go through everything with you properly. Here: https://pixel-perfect-remake-63.lovable.app/apply</div><span class="spin-tag tag-c">C — clean close with link</span></div>
+      <div class="msg them"><div class="msg-bubble">Ok cool I'll have a look 👍</div></div>
+      <div class="msg us"><div class="msg-bubble">Nice one. Let me know if you've got any questions before you fill it in 🙌</div><span class="spin-tag tag-c">C — leave the door open</span></div>
+    </div>
+    <div class="card">
+      <h3>After the close</h3>
+      <p>If they don't fill it in within 24 hours, one light follow-up is fine: <strong>"Hey — did you manage to get a look at that form? Happy to answer anything if you're not sure."</strong> One follow-up. Then leave it.</p>
+    </div>
+    <div class="section-tag">Practice</div>
+    <div class="practice-wrap">
+      <div class="practice-scenario">They've said "sounds interesting, I might be up for that." Engaged but not committed yet.</div>
+      <div class="practice-prompt">What's the best close?</div>
+      <div class="options">
+        <button class="opt" onclick="checkAnswer(this,false,'q6','Too much pressure. "Secure your spot" and "limited" feels pushy — you\'ve built a good conversation, don\'t kill it here.')">You need to sign up quick — spots are limited. Here\'s the link, secure yours now: [link]</button>
+        <button class="opt" onclick="checkAnswer(this,false,'q6','You\'re stepping back when you should be moving forward. Give them the next step.')">Ok let me know if you want to hear more at some point!</button>
+        <button class="opt" onclick="checkAnswer(this,true,'q6','Spot on. Light, clear, low pressure. One next step. That\'s a good close.')">Nice — easiest next step is just getting your details in, it\'s a short form. We can go through everything from there: [link]</button>
+      </div>
+      <div class="feedback-box" id="fb-q6"></div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-secondary" onclick="goModule('value')">← Back</button>
+      <button class="btn-primary" onclick="completeAndGo('close','objections')">Next: Objection Handling →</button>
+    </div>
+  </div>
+
+  <!-- MODULE 9: OBJECTIONS -->
+  <div id="mod-objections" class="content hidden">
+    <div class="module-hero">
+      <h1>OBJECTION<br><span>HANDLING.</span></h1>
+      <p>Objections aren't rejections. They're questions in disguise. When someone pushes back, they're still engaged — they just need something answered before they can move forward.</p>
+    </div>
+    <div class="card gold-left">
+      <h3>The formula</h3>
+      <p><strong>Acknowledge → Answer → Connect back.</strong> Never argue. Never skip the acknowledge. People need to feel heard before they'll hear you.</p>
+    </div>
+    <div class="card green-left">
+      <h3>"It sounds like a scam / too good to be true"</h3>
+      <div class="msg-thread" style="margin:12px 0 0;">
+        <div class="msg us"><div class="msg-bubble">Totally fair — there's a lot of stuff online that looks similar and isn't. This is a registered CIC — it's publicly listed. Happy to send you the company number if that helps? The LinkedIn page is live too, you can see real people who've been through it.</div></div>
+      </div>
+    </div>
+    <div class="card green-left">
+      <h3>"I can't do Saturdays"</h3>
+      <div class="msg-thread" style="margin:12px 0 0;">
+        <div class="msg us"><div class="msg-bubble">Yeah Saturdays are the main days — though it's worth having a chat because sometimes Sunday can work depending on your area. What's usually going on for you on Saturdays?</div></div>
+      </div>
+    </div>
+    <div class="card green-left">
+      <h3>"It's too far"</h3>
+      <div class="msg-thread" style="margin:12px 0 0;">
+        <div class="msg us"><div class="msg-bubble">The first session starts from Finsbury Park but the actual sales work you do in your own area — so after day one it's basically local to you. Is it specifically the first day that's the issue?</div></div>
+      </div>
+    </div>
+    <div class="card green-left">
+      <h3>"I don't have time"</h3>
+      <div class="msg-thread" style="margin:12px 0 0;">
+        <div class="msg us"><div class="msg-bubble">That's the thing — it runs on weekends so it doesn't touch your school or college week. And the online side is flexible, you do it when it suits you. What does your weekend usually look like?</div></div>
+      </div>
+    </div>
+    <div class="card green-left">
+      <h3>"What's the catch / how does the pay work"</h3>
+      <div class="msg-thread" style="margin:12px 0 0;">
+        <div class="msg us"><div class="msg-bubble">No catch — it's a programme, so you earn based on what you do. The main value is the experience and certificate honestly — that's what stays with you. But yes, there's earning alongside it.</div></div>
+      </div>
+    </div>
+    <div class="note"><strong>Remember on pay:</strong> Acknowledge it, answer simply, then move back to the value. Never dwell on it.</div>
+    <div class="section-tag">Practice</div>
+    <div class="practice-wrap">
+      <div class="practice-scenario">They say: "I've heard about things like this before and they're usually just trying to get free labour."</div>
+      <div class="practice-prompt">Best response?</div>
+      <div class="options">
+        <button class="opt" onclick="checkAnswer(this,false,'q7','You\'re being defensive — that puts people off. Acknowledge first, always.')">That\'s not what this is at all, this is a legitimate registered organisation.</button>
+        <button class="opt" onclick="checkAnswer(this,true,'q7','Acknowledge, address the specific concern, then move forward. That\'s the formula working.')">That\'s a fair concern and honestly there are dodgy ones out there. This is a registered CIC — you can look it up, it\'s on Companies House. And there are real people on LinkedIn who\'ve done it. I can send you the page if you want to take a look before deciding anything?</button>
+        <button class="opt" onclick="checkAnswer(this,false,'q7','You\'ve given up. An objection isn\'t a no — it\'s a question. Keep going.')">No worries, I get it — if you change your mind just let me know!</button>
+      </div>
+      <div class="feedback-box" id="fb-q7"></div>
+    </div>
+    <div class="nav-btns">
+      <button class="btn-secondary" onclick="goModule('close')">← Back</button>
+      <button class="btn-primary" onclick="completeAndGo('objections','simulator')">Final Challenge: Live Sim →</button>
+    </div>
+  </div>
+
+  <!-- MODULE 10: SIMULATOR -->
+  <div id="mod-simulator">
+    <div id="sim-wrap">
+
+      <!-- PERSONA SELECT -->
+      <div id="persona-select" class="persona-select-area">
+        <div class="module-hero" style="margin-bottom:20px;">
+          <h1>LIVE<br><span>CONVERSATION SIM.</span></h1>
+          <p>You've learned the framework. Now put it into practice. Pick a prospect — the AI plays them based on real conversation patterns. Run the full SPIN sequence, build value, handle objections, and close.</p>
+        </div>
+        <div class="section-tag">Choose your prospect</div>
+        <div class="persona-grid">
+          <div class="persona-card" data-id="prospect_a" onclick="selectPersona('prospect_a')">
+            <div class="p-name">Prospect A</div>
+            <div class="p-trait">Year 12, thinking about property. No useful experience yet. Will engage well if approached right.</div>
+            <div class="p-diff diff-easy">Approachable</div>
+          </div>
+          <div class="persona-card" data-id="prospect_b" onclick="selectPersona('prospect_b')">
+            <div class="p-name">Prospect B</div>
+            <div class="p-trait">Year 13, competitive field. Sceptical about Saturday commitment and distance. Needs objections handled.</div>
+            <div class="p-diff diff-med">Moderate</div>
+          </div>
+          <div class="persona-card" data-id="prospect_c" onclick="selectPersona('prospect_c')">
+            <div class="p-name">Prospect C</div>
+            <div class="p-trait">First year college, wants to go into marketing. Enthusiastic but easily goes off topic.</div>
+            <div class="p-diff diff-easy">Approachable</div>
+          </div>
+          <div class="persona-card" data-id="prospect_d" onclick="selectPersona('prospect_d')">
+            <div class="p-name">Prospect D</div>
+            <div class="p-trait">Just finished college. Suspicious — thinks it might be a scam. Pushes back hard. Trust must be earned.</div>
+            <div class="p-diff diff-hard">Resistant</div>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div class="section-tag">Platform</div>
+          <div class="platform-row">
+            <button class="btn-secondary" style="padding:8px 18px;font-size:12px;" onclick="setPlatform('LinkedIn',this)">LinkedIn</button>
+            <button class="btn-secondary" style="padding:8px 18px;font-size:12px;" onclick="setPlatform('WhatsApp',this)">WhatsApp</button>
+            <button class="btn-secondary" style="padding:8px 18px;font-size:12px;" onclick="setPlatform('Snapchat',this)">Snapchat</button>
+          </div>
+        </div>
+        <div class="nav-btns" style="margin-top:4px;border-top:none;">
+          <button class="btn-secondary" onclick="goModule('objections')">← Back</button>
+          <button class="btn-primary" id="start-sim-btn" onclick="startSim()" disabled>Start Conversation →</button>
+        </div>
+      </div>
+
+      <!-- CHAT UI -->
+      <div id="chat-ui" class="chat-area hidden">
+        <div class="chat-header">
+          <div class="avatar" id="chat-avatar">A</div>
+          <div>
+            <div class="prospect-name" id="chat-name">Prospect A</div>
+            <div class="prospect-status" id="chat-platform">LinkedIn · Online</div>
+          </div>
+          <div class="stage-pill" id="stage-pill">Stage: Situation</div>
+          <button class="btn-secondary" style="margin-left:12px;padding:6px 13px;font-size:11px;" onclick="resetSim()">↩ New Prospect</button>
+        </div>
+        <div class="score-row">
+          <div class="sc"><div class="sc-val" id="score-spin">0/4</div><div class="sc-lbl">SPIN Steps</div></div>
+          <div class="sc"><div class="sc-val" id="score-msgs">0</div><div class="sc-lbl">Messages Sent</div></div>
+          <div class="sc"><div class="sc-val" id="score-rating">—</div><div class="sc-lbl">Last Rating</div></div>
+        </div>
+        <div class="messages" id="messages"></div>
+        <div class="input-bar">
+          <textarea class="sim-input" id="sim-input" placeholder="Type your message..." rows="1"
+            onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+          <button class="send-btn" id="send-btn" onclick="sendMessage()">Send</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  </div>
+
+  <!-- COACH TAB -->
+  <div id="pane-coach" class="tab-pane">
+    <div class="coach-page">
+
+
+  <div id="input-section">
+    <span class="section-tag">Platform</span>
+    <div class="platform-row">
+      <button class="plat-btn active" onclick="setPlatform('LinkedIn',this)">LinkedIn</button>
+      <button class="plat-btn" onclick="setPlatform('WhatsApp',this)">WhatsApp</button>
+      <button class="plat-btn" onclick="setPlatform('Snapchat',this)">Snapchat</button>
+    </div>
+
+    <span class="section-tag">How do you want to share the conversation?</span>
+    <div class="input-toggle">
+      <button class="toggle-btn active" onclick="switchMode('screenshot',this)">📷 Screenshot(s)</button>
+      <button class="toggle-btn" onclick="switchMode('text',this)">📝 Paste as text</button>
+    </div>
+
+    <!-- SCREENSHOT MODE -->
+    <div id="mode-screenshot">
+      <div id="screenshots-grid" class="screenshots-grid" style="display:none;"></div>
+      <div class="upload-zone" id="upload-zone"
+        ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropFiles(event)">
+        <input type="file" id="file-input" accept="image/*" multiple onchange="handleFiles(this.files)">
+        <span class="upload-icon">📱</span>
+        <div class="upload-title">Drop your screenshots here</div>
+        <div class="upload-sub">or <span>tap to browse</span></div>
+        <div class="upload-sub">Upload multiple if the conversation is long</div>
+      </div>
+      <p class="paste-hint">Screenshot the full chat thread on your phone and upload it. The AI will read the whole thing and coach every message you sent.</p>
+    </div>
+
+    <!-- TEXT MODE -->
+    <div id="mode-text" class="hidden">
+      <label class="field-label">Paste the full conversation</label>
+      <textarea class="field-textarea" id="convo-text"
+        placeholder="Just select all and paste — exactly as it appears in the app:
+
+Hey yeah I'm in Year 12
+Why?
+Nice one, what are you thinking of doing after?
+Probably uni not sure yet
+Makes sense, have you got any experience so far?
+
+Don't worry about labelling anything. The AI figures out who said what."></textarea>
+      <p class="paste-hint">Open the chat, select all, copy, paste. That's it. The AI works out who said what from context.</p>
+    </div>
+
+    <div style="margin-top:16px;">
+      <label class="field-label">Anything else we should know? (optional)</label>
+      <textarea class="field-textarea small" id="extra-context"
+        placeholder="e.g. They went quiet halfway through, this was a cold outreach, they'd seen one of my posts first..."></textarea>
+    </div>
+
+    <button class="analyse-btn" id="analyse-btn" onclick="analyse()" disabled>Analyse This Conversation →</button>
+  </div>
+
+  <div id="loading">
+    <div class="loading-dots"><div class="ld"></div><div class="ld"></div><div class="ld"></div></div>
+    <div class="loading-text">Reading the full conversation...</div>
+    <div class="loading-sub">Coaching every message — this takes a few seconds</div>
+  </div>
+
+  <div id="results">
+    <span class="section-tag">Conversation Coaching</span>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:1.5px;color:var(--white);margin-bottom:18px;">HERE'S YOUR <span style="color:var(--gold);">FEEDBACK.</span></div>
+
+    <div class="result-chips" id="result-chips"></div>
+
+    <div class="result-card gold">
+      <h3>Overall verdict</h3>
+      <p id="verdict-text"></p>
+    </div>
+
+    <div class="result-card green">
+      <h3>What worked</h3>
+      <p id="good-text"></p>
+    </div>
+
+    <div class="result-card amber">
+      <h3>Where it went off track</h3>
+      <p id="wrong-text"></p>
+    </div>
+
+    <div class="result-card" id="breakdown-card" style="display:none;">
+      <h3>Message by message</h3>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Your messages are coached in detail. The prospect's replies are shown for context.</p>
+      <div class="msg-breakdown" id="msg-breakdown"></div>
+    </div>
+
+    <div class="result-card">
+      <h3>Best next message to send</h3>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Based on where the conversation ended — send this next.</p>
+      <div class="improved-block">
+        <div class="improved-label">Send this →</div>
+        <div class="improved-text" id="next-msg-text"></div>
+      </div>
+      <button class="copy-btn" onclick="copyText('next-msg-text',this)">Copy to clipboard</button>
+    </div>
+
+    <div class="result-card red" id="redo-card" style="display:none;">
+      <h3>If you could redo it — what to change</h3>
+      <p id="redo-text"></p>
+    </div>
+
+    <div class="submit-block">
+      <h3>Help make this tool better</h3>
+      <p>Submit this conversation anonymously. It goes into a shared knowledge base that improves coaching for everyone on the programme. No names attached.</p>
+      <div class="submit-row">
+        <button class="submit-btn" id="submit-btn" onclick="submitToSheet()">Submit anonymously →</button>
+        <button class="skip-btn" onclick="document.querySelector('.submit-block').style.display='none'">No thanks</button>
+      </div>
+      <div class="submit-success" id="submit-success">✓ Submitted — thank you. This helps the whole team.</div>
+      <div class="submit-error" id="submit-error">Couldn't submit right now — your coaching is still here.</div>
+    </div>
+
+    <button class="new-btn" onclick="resetAll()">← Coach another conversation</button>
+  </div>
+
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+const SHEET_URL='https://script.google.com/macros/s/AKfycbyzZcu-jFEckGkhKYxoaIpmrkZ7ciDAu0a99W75kgFP6H0Nhd5vLaqBDWftDNkHQiyO/exec';
+const SK='im_spin_v1';
+
+// ── SHARED STATE ──
+let userName='';
+
+// ── ONBOARDING ──
+async function initApp(){
+  const saved=await loadState();
+  if(saved&&saved.name){
+    userName=saved.name;
+    completed=new Set(saved.completed||[]);
+    document.getElementById('onboarding').style.display='none';
+    applyProgress(saved.current||'intro',true);
+    document.getElementById('logo-user').classList.remove('hidden');
+    document.getElementById('logo-name').textContent=userName;
+  }
+}
+
+function startApp(){
+  const n=document.getElementById('name-input').value.trim();
+  if(!n)return;
+  userName=n;
+  document.getElementById('onboarding').style.display='none';
+  document.getElementById('logo-user').classList.remove('hidden');
+  document.getElementById('logo-name').textContent=userName;
+  // Show greeting in coach tab header area
+  applyProgress('intro',false);
+  saveState();
+}
+
+// ── TAB SWITCHING ──
+function switchTab(tab){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('pane-'+tab).classList.add('active');
+  document.getElementById('tab-'+tab).classList.add('active');
+  const sidebar=document.getElementById('sidebar');
+  const main=document.getElementById('main');
+  const tabBar=document.getElementById('tab-bar');
+  if(tab==='training'){
+    sidebar.style.display='flex';
+    main.style.marginLeft='260px';
+    tabBar.style.paddingLeft='260px';
+  } else {
+    sidebar.style.display='none';
+    main.style.marginLeft='0';
+    tabBar.style.paddingLeft='0';
+  }
+}
+
+window.addEventListener('load', initApp);
+document.addEventListener('DOMContentLoaded',()=>{
+  const ct=document.getElementById('convo-text');
+  if(ct) ct.addEventListener('input',checkReady);
+});
+
+
+const MODULES=['intro','programme','situation','problem','implication','need','value','close','objections','simulator'];
+const TITLES={intro:'What is SPIN Selling?',programme:'Know the Programme',situation:'Situation Questions',problem:'Problem Questions',implication:'Implication Questions',need:'Need-Payoff Questions',value:'Building Value',close:'The Close',objections:'Objection Handling',simulator:'Live Conversation Sim'};
+const LABELS={intro:'Module 1',programme:'Module 2',situation:'Module 3',problem:'Module 4',implication:'Module 5',need:'Module 6',value:'Module 7',close:'Module 8',objections:'Module 9',simulator:'Live Sim'};
+const BADGES={intro:'Foundation',programme:'Foundation',situation:'SPIN Framework',problem:'SPIN Framework',implication:'SPIN Framework',need:'SPIN Framework',value:'Closing the Deal',close:'Closing the Deal',objections:'Objection Handling',simulator:'Live Practice'};
+const BTYPES={intro:'badge-gold',programme:'badge-gold',situation:'badge-gold',problem:'badge-gold',implication:'badge-gold',need:'badge-gold',value:'badge-green',close:'badge-green',objections:'badge-green',simulator:'badge-sim'};
+
+let completed=new Set(), current='intro';
+let simPersona=null, simPlatform='LinkedIn', simMessages=[], spinSteps=0, msgCount=0, isTyping=false;
+
+// ── STORAGE ──
+async function saveState(){
+  try{
+    await window.storage.set(SK,JSON.stringify({name:userName,completed:[...completed],current}));
+  }catch(e){}
+}
+async function loadState(){
+  try{
+    const r=await window.storage.get(SK);
+    return r&&r.value?JSON.parse(r.value):null;
+  }catch(e){return null;}
+}
+async function clearState(){
+  try{await window.storage.delete(SK);}catch(e){}
+}
+
+// ── INIT ──
+
+
+function applyProgress(dest,returning){
+  document.getElementById('logo-user').classList.remove('hidden');
+  document.getElementById('logo-name').textContent=userName;
+
+  completed.forEach(id=>{
+    const el=document.querySelector(`[data-mod="${id}"]`);
+    if(el){el.classList.remove('locked');el.classList.add('done');}
+    const ni=MODULES.indexOf(id)+1;
+    if(ni<MODULES.length){
+      const nx=document.querySelector(`[data-mod="${MODULES[ni]}"]`);
+      if(nx)nx.classList.remove('locked');
+    }
+  });
+  updateProgress();
+
+  const go=(!completed.has(dest)&&dest!=='intro')?
+    (MODULES.find(m=>!completed.has(m))||'intro'):dest;
+  goModule(go);
+
+  if(returning&&completed.size>0){
+    showToast(`Welcome back, ${userName} — continuing where you left off`);
+  }
+}
+
+// ── NAVIGATION ──
+function goModule(id){
+  const navEl=document.querySelector(`[data-mod="${id}"]`);
+  if(navEl&&navEl.classList.contains('locked'))return;
+
+  document.querySelectorAll('.content').forEach(e=>e.classList.add('hidden'));
+  const simEl=document.getElementById('mod-simulator');
+  simEl.classList.remove('visible');
+  simEl.style.display='none';
+
+  if(id==='simulator'){
+    simEl.style.display='flex';
+    simEl.classList.add('visible');
+  } else {
+    const t=document.getElementById('mod-'+id);
+    if(t)t.classList.remove('hidden');
+  }
+
+  document.querySelectorAll('.nav-item').forEach(e=>e.classList.remove('active'));
+  if(navEl)navEl.classList.add('active');
+
+  document.getElementById('tb-label').textContent=LABELS[id]||'';
+  document.getElementById('tb-title').textContent=TITLES[id]||'';
+  const b=document.getElementById('tb-badge');
+  b.textContent=BADGES[id]||'';
+  b.className='badge '+(BTYPES[id]||'badge-gold');
+
+  current=id;
+  saveState();
+}
+
+function completeAndGo(id,next){
+  completed.add(id);
+  const el=document.querySelector(`[data-mod="${id}"]`);
+  if(el){el.classList.add('done');el.classList.remove('active');}
+  const nx=document.querySelector(`[data-mod="${next}"]`);
+  if(nx)nx.classList.remove('locked');
+  updateProgress();
+  saveState();
+  goModule(next);
+}
+
+function updateProgress(){
+  const pct=Math.round((completed.size/MODULES.length)*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-pct').textContent=pct+'% complete';
+}
+
+function checkAnswer(btn,correct,qid,explanation){
+  btn.parentElement.querySelectorAll('.opt').forEach(s=>{s.disabled=true;});
+  btn.classList.add(correct?'correct':'wrong');
+  const fb=document.getElementById('fb-'+qid);
+  fb.textContent=(correct?'✓ ':'✗ ')+explanation;
+  fb.className='feedback-box show '+(correct?'good':'bad');
+}
+
+function confirmReset(){
+  if(confirm('Reset all progress? This cannot be undone.')){
+    clearState();
+    location.reload();
+  }
+}
+
+// ── TOAST ──
+function showToast(msg){
+  const t=document.createElement('div');
+  t.className='toast';t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),400);},3000);
+}
+
+// ── SIMULATOR ──
+const PERSONAS={
+  prospect_a:{
+    name:'Prospect A',initial:'A',
+    system:`You are a 17-year-old girl in Year 12 at a London school. Interested in property and estate management but not fully sure. No real work experience — everything found has been shadowing or unpaid. Someone has messaged you on LinkedIn.
+
+Respond like a real teenager — brief, casual, slightly guarded at first but genuinely open if not pushed. Don't volunteer information — answer what's asked. If they pitch too early get suspicious. If they ask good questions open up.
+
+Key traits: guarded opener, opens up with good questions, worried about standing out vs others, will ask about pay at some point, will agree to the form if the conversation goes well.
+
+SHORT replies — 1-3 lines, under 40 words. Real teen texting style. Occasional emoji ok.
+
+At the END of every reply on a new line write:
+COACHING:{"stage":"situation|problem|implication|need|value|close|objection|off-track","quality":"good|ok|miss","note":"coaching note under 10 words"}`
+  },
+  prospect_b:{
+    name:'Prospect B',initial:'B',
+    system:`You are a 17-year-old finishing Year 13, interested in a competitive professional field. Struggled to find work experience — it's a catch-22. Somewhat sceptical. Two objections you'll raise: 1) Saturdays are sometimes awkward, 2) the starting location feels far.
+
+Brief, real, a bit guarded. Not rude. If objections are handled and value is built you become genuinely interested. If pressured, go colder.
+
+SHORT replies — 1-3 lines, under 40 words.
+
+At the END of every reply on a new line write:
+COACHING:{"stage":"situation|problem|implication|need|value|close|objection|off-track","quality":"good|ok|miss","note":"coaching note under 10 words"}`
+  },
+  prospect_c:{
+    name:'Prospect C',initial:'C',
+    system:`You are a 17-year-old, first year college, studying business, interested in marketing. Enthusiastic and chatty but easily go off topic. No real work experience. Excited about the programme once you understand it but need things explained simply.
+
+Short replies, enthusiastic, real teen London vibe. Sometimes say things like "wait that actually sounds good ngl".
+
+At the END of every reply on a new line write:
+COACHING:{"stage":"situation|problem|implication|need|value|close|objection|off-track","quality":"good|ok|miss","note":"coaching note under 10 words"}`
+  },
+  prospect_d:{
+    name:'Prospect D',initial:'D',
+    system:`You are 18, just finished college. Suspicious — think this might be a scam or free labour scheme. Push back hard at first.
+
+However: if the person is genuine, transparent, addresses your specific concerns (is it legit? what's the catch? how does earning work?) you'll gradually open up. You won't make it easy but if they build real trust you'll engage.
+
+Short, sceptical replies. Real teen style. One-word answers sometimes.
+
+At the END of every reply on a new line write:
+COACHING:{"stage":"situation|problem|implication|need|value|close|objection|off-track","quality":"good|ok|miss","note":"coaching note under 10 words"}`
+  }
+};
+
+function selectPersona(id){
+  simPersona=id;
+  document.querySelectorAll('.persona-card').forEach(c=>c.classList.remove('selected'));
+  document.querySelector(`[data-id="${id}"]`).classList.add('selected');
+  document.getElementById('start-sim-btn').disabled=false;
+}
+
+function setPlatform(p,btn){
+  simPlatform=p;
+  document.querySelectorAll('.platform-row .btn-secondary').forEach(b=>b.style.borderColor='');
+  if(btn)btn.style.borderColor='var(--gold)';
+}
+
+function startSim(){
+  if(!simPersona)return;
+  const p=PERSONAS[simPersona];
+  document.getElementById('persona-select').classList.add('hidden');
+  document.getElementById('chat-ui').classList.remove('hidden');
+  document.getElementById('chat-avatar').textContent=p.initial;
+  document.getElementById('chat-name').textContent=p.name;
+  document.getElementById('chat-platform').textContent=simPlatform+' · Online';
+  simMessages=[];spinSteps=0;msgCount=0;
+  document.getElementById('messages').innerHTML='';
+  document.getElementById('stage-pill').textContent='Stage: Situation';
+  document.getElementById('score-spin').textContent='0/4';
+  document.getElementById('score-msgs').textContent='0';
+  document.getElementById('score-rating').textContent='—';
+}
+
+function resetSim(){
+  document.getElementById('chat-ui').classList.add('hidden');
+  document.getElementById('persona-select').classList.remove('hidden');
+  simPersona=null;
+  document.querySelectorAll('.persona-card').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('start-sim-btn').disabled=true;
+}
+
+function handleKey(e){
+  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}
+}
+function autoResize(el){
+  el.style.height='auto';
+  el.style.height=Math.min(el.scrollHeight,100)+'px';
+}
+
+async function sendMessage(){
+  const input=document.getElementById('sim-input');
+  const text=input.value.trim();
+  if(!text||isTyping)return;
+  input.value='';input.style.height='40px';
+  msgCount++;
+  document.getElementById('score-msgs').textContent=msgCount;
+  addBubble('user',text);
+  simMessages.push({role:'user',content:text});
+  isTyping=true;
+  document.getElementById('send-btn').disabled=true;
+  const typing=addTyping();
+  try{
+    const p=PERSONAS[simPersona];
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:p.system,
+        messages:simMessages
+      })
+    });
+    const data=await resp.json();
+    const full=data.content[0].text;
+    const cm=full.match(/COACHING:(\{[^\n]+\})/);
+    let coaching=null;
+    if(cm){try{coaching=JSON.parse(cm[1]);}catch(e){}}
+    const spoken=full.replace(/\nCOACHING:.*/,'').trim();
+    typing.remove();
+    simMessages.push({role:'assistant',content:full});
+    addBubble('prospect',spoken);
+    if(coaching)applyCoaching(coaching);
+  }catch(e){
+    typing.remove();
+    addBubble('prospect','[Something went wrong — try again]');
+  }
+  isTyping=false;
+  document.getElementById('send-btn').disabled=false;
+}
+
+function applyCoaching(c){
+  const order=['situation','problem','implication','need','value','close'];
+  const labels=['Situation','Problem','Implication','Need-Payoff','Value Building','Close'];
+  const idx=order.indexOf(c.stage);
+  if(idx>-1){
+    spinSteps=Math.max(spinSteps,idx+1);
+    document.getElementById('stage-pill').textContent='Stage: '+labels[idx];
+    document.getElementById('score-spin').textContent=Math.min(spinSteps,4)+'/4';
+  }
+  const lastUser=document.querySelector('#messages .sim-msg.user:last-of-type');
+  if(lastUser&&c.note){
+    const tag=document.createElement('span');
+    tag.className='fb-tag '+(c.quality==='good'?'good':c.quality==='ok'?'ok':'miss');
+    tag.textContent=c.note;
+    lastUser.appendChild(tag);
+  }
+  const r={good:'★★★★★',ok:'★★★★☆',miss:'★★☆☆☆'}[c.quality]||'★★★☆☆';
+  document.getElementById('score-rating').textContent=r;
+}
+
+function addBubble(type,text){
+  const msgs=document.getElementById('messages');
+  const wrap=document.createElement('div');
+  wrap.className='sim-msg '+type;
+  const b=document.createElement('div');
+  b.className='sim-bubble';b.textContent=text;
+  wrap.appendChild(b);msgs.appendChild(wrap);
+  msgs.scrollTop=msgs.scrollHeight;
+  return wrap;
+}
+function addTyping(){
+  const msgs=document.getElementById('messages');
+  const wrap=document.createElement('div');
+  wrap.className='sim-msg prospect';
+  wrap.innerHTML='<div class="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+  msgs.appendChild(wrap);msgs.scrollTop=msgs.scrollHeight;
+  return wrap;
+}
+
+
+
+
+function setPlatform(p,btn){
+  platform=p;
+  document.querySelectorAll('.plat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function switchMode(m,btn){
+  mode=m;
+  document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('mode-screenshot').classList.toggle('hidden',m!=='screenshot');
+  document.getElementById('mode-text').classList.toggle('hidden',m!=='text');
+  checkReady();
+}
+function dragOver(e){e.preventDefault();document.getElementById('upload-zone').classList.add('drag');}
+function dragLeave(){document.getElementById('upload-zone').classList.remove('drag');}
+function dropFiles(e){e.preventDefault();dragLeave();handleFiles(e.dataTransfer.files);}
+function handleFiles(files){
+  Array.from(files).forEach(file=>{
+    if(!file.type.startsWith('image/'))return;
+    const reader=new FileReader();
+    reader.onload=e=>{
+      uploadedFiles.push({file,dataUrl:e.target.result});
+      renderScreenshots();checkReady();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function renderScreenshots(){
+  const grid=document.getElementById('screenshots-grid');
+  grid.innerHTML='';
+  grid.style.display=uploadedFiles.length?'grid':'none';
+  uploadedFiles.forEach((f,i)=>{
+    const item=document.createElement('div');
+    item.className='screenshot-item';
+    item.innerHTML=`<img src="${f.dataUrl}"><button class="screenshot-remove" onclick="removeFile(${i})">✕</button>`;
+    grid.appendChild(item);
+  });
+  const addBtn=document.createElement('button');
+  addBtn.className='add-more-btn';
+  addBtn.innerHTML='<input type="file" accept="image/*" multiple onchange="handleFiles(this.files)"><span style="font-size:20px">+</span><span>Add more</span>';
+  grid.appendChild(addBtn);
+  document.getElementById('upload-zone').style.display='none';
+}
+function removeFile(i){
+  uploadedFiles.splice(i,1);
+  if(!uploadedFiles.length){
+    document.getElementById('upload-zone').style.display='block';
+    document.getElementById('screenshots-grid').style.display='none';
+    document.getElementById('screenshots-grid').innerHTML='';
+  } else renderScreenshots();
+  checkReady();
+}
+function checkReady(){
+  let ready=mode==='screenshot'?uploadedFiles.length>0:document.getElementById('convo-text').value.trim().length>20;
+  document.getElementById('analyse-btn').disabled=!ready;
+}
+
+async function analyse(){
+  document.getElementById('input-section').style.display='none';
+  document.getElementById('loading').style.display='block';
+  const extra=document.getElementById('extra-context').value.trim();
+  const sys=`You are a SPIN sales coach for Inspiring Me CIC, a work experience programme for young people 16-25 in the UK. Participants do field sales, build their CV, get a professional LinkedIn profile, and earn based on results (commission — never say "get paid on the day" or "paid for your time").
+
+The trainee is a young person trained in SPIN selling having a real typed conversation on ${platform} recruiting another young person to the programme.
+
+SPIN: S=Situation, P=Problem, I=Implication, N=Need-Payoff, V=Value Building, O=Objection Handling, C=Closing
+Key rules: never pitch before gap surfaced, under 3 lines per message, one question per message, on pay say "you earn based on what you put in" ONCE MAX never lead with it, objections: Acknowledge→Answer→Connect, close link: https://pixel-perfect-remake-63.lovable.app/apply
+
+Analyse the FULL conversation. Return ONLY valid JSON, no markdown:
+{
+  "overall_quality":"good|ok|miss",
+  "spin_stage_reached":"furthest stage reached",
+  "verdict":"2-3 sentences honest overall",
+  "what_worked":"specific things done well",
+  "where_off_track":"specific moments that went wrong — precise",
+  "messages":[{"sender":"them|me","text":"message text","stage":"S|P|I|N|V|O|C|none","quality":"good|ok|miss|n/a","coaching":"brief note for me messages only, empty for them","tags":["tag"]}],
+  "next_message":"best next message to send — natural 16-25 tone, under 3 lines",
+  "do_differently":"1-2 biggest changes if redoing the conversation"
+}
+Tags: "Good S","Good P","Good I","Good N","Good value","Good close","Good objection handle","Pitched too early","Too long","Two questions","Skipped acknowledge","Led with pay","Missing next step","Good acknowledge","Built rapport","Off track"`;
+
+  try{
+    let content=[];
+    if(mode==='screenshot'){
+      uploadedFiles.forEach(f=>{
+        content.push({type:'image',source:{type:'base64',media_type:f.file.type||'image/jpeg',data:f.dataUrl.split(',')[1]}});
+      });
+      content.push({type:'text',text:`These are screenshots of a real ${platform} conversation. Extract all messages in order, identify who sent each (trainee vs prospect), analyse the full conversation and return the JSON coaching.${extra?' Extra context: '+extra:''}`});
+      lastConvoText='['+uploadedFiles.length+' screenshot(s)]';
+    } else {
+      const text=document.getElementById('convo-text').value.trim();
+      lastConvoText=text;
+      content.push({type:'text',text:`Here is a real ${platform} conversation pasted directly from the app (messages appear one per line in the order they were sent — no labels). Use context clues like question/answer flow, topic progression, and conversational logic to determine which messages were sent by the trainee and which by the prospect:\n\n${text}\n\nAnalyse the full conversation and return the JSON coaching.${extra?'\nExtra context: '+extra:''}`});
+    }
+    const resp=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,system:sys,messages:[{role:'user',content}]})
+    });
+    const data=await resp.json();
+    let raw=data.content[0].text.trim().replace(/```json|```/g,'').trim();
+    const result=JSON.parse(raw);
+    lastResult={platform,mode,convo:lastConvoText,extra,...result,submittedAt:new Date().toISOString()};
+    showResults(result);
+  } catch(e){
+    console.error(e);
+    document.getElementById('loading').style.display='none';
+    document.getElementById('input-section').style.display='block';
+    alert('Something went wrong — please try again.');
+  }
+}
+
+function showResults(r){
+  document.getElementById('loading').style.display='none';
+  document.getElementById('results').style.display='block';
+  const chips=document.getElementById('result-chips');
+  const qMap={good:['chip-good','✓ Strong conversation'],ok:['chip-ok','~ Needs some work'],miss:['chip-miss','✗ Needs rework']};
+  const [qc,ql]=qMap[r.overall_quality]||['chip-neutral','—'];
+  chips.innerHTML=`<span class="chip ${qc}">${ql}</span><span class="chip chip-stage">Reached: ${r.spin_stage_reached||'—'}</span>`;
+  document.getElementById('verdict-text').innerHTML=r.verdict||'—';
+  document.getElementById('good-text').innerHTML=r.what_worked||'—';
+  document.getElementById('wrong-text').innerHTML=r.where_off_track||'—';
+  document.getElementById('next-msg-text').textContent=r.next_message||'—';
+  if(r.do_differently){
+    document.getElementById('redo-text').innerHTML=r.do_differently;
+    document.getElementById('redo-card').style.display='block';
+  }
+  if(r.messages&&r.messages.length){
+    const bd=document.getElementById('msg-breakdown');
+    bd.innerHTML='';
+    r.messages.forEach(m=>{
+      const isMe=m.sender==='me';
+      const div=document.createElement('div');
+      div.className='msg-row';
+      const tags=(m.tags||[]).map(t=>{
+        const tc=t.startsWith('Good')?'tag-good':t==='Off track'||t==='Pitched too early'||t==='Led with pay'?'tag-miss':'tag-ok';
+        return `<span class="msg-tag ${tc}">${t}</span>`;
+      }).join('');
+      div.innerHTML=`
+        <div class="msg-row-header">
+          <span class="msg-sender ${isMe?'you':'them'}">${isMe?'You':'Prospect'}</span>
+          ${isMe&&m.stage&&m.stage!=='none'?`<span class="chip chip-stage" style="font-size:9px;padding:2px 8px;">${m.stage}</span>`:''}
+        </div>
+        <div class="msg-body">${m.text||''}</div>
+        ${isMe&&m.coaching?`<div class="msg-coaching ${m.quality==='good'?'good':m.quality==='miss'?'miss':'ok'}">${tags?tags+'<br>':''}${m.coaching}</div>`:''}
+      `;
+      bd.appendChild(div);
+    });
+    document.getElementById('breakdown-card').style.display='block';
+  }
+  document.getElementById('submit-btn').disabled=false;
+  document.getElementById('submit-success').style.display='none';
+  document.getElementById('submit-error').style.display='none';
+}
+
+function copyText(id,btn){
+  navigator.clipboard.writeText(document.getElementById(id).textContent).then(()=>{
+    btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy to clipboard',2000);
+  });
+}
+
+async function submitToSheet(){
+  if(!lastResult)return;
+  const btn=document.getElementById('submit-btn');
+  btn.disabled=true;btn.textContent='Submitting...';
+  try{
+    await fetch(SHEET_URL,{
+      method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        platform:lastResult.platform,mode:lastResult.mode,
+        overall_quality:lastResult.overall_quality,
+        spin_stage_reached:lastResult.spin_stage_reached,
+        verdict:lastResult.verdict,
+        what_worked:lastResult.what_worked,
+        where_off_track:lastResult.where_off_track,
+        next_message:lastResult.next_message,
+        do_differently:lastResult.do_differently||'',
+        convo_text:typeof lastResult.convo==='string'?lastResult.convo.substring(0,2000):'[screenshot]',
+        submitted_at:lastResult.submittedAt
+      })
+    });
+    document.getElementById('submit-success').style.display='block';
+    btn.textContent='✓ Submitted';
+  } catch(e){
+    document.getElementById('submit-error').style.display='block';
+    btn.disabled=false;btn.textContent='Submit anonymously →';
+  }
+}
+
+function resetAll(){
+  document.getElementById('results').style.display='none';
+  document.getElementById('input-section').style.display='block';
+  document.getElementById('convo-text').value='';
+  document.getElementById('extra-context').value='';
+  uploadedFiles=[];
+  document.getElementById('screenshots-grid').style.display='none';
+  document.getElementById('screenshots-grid').innerHTML='';
+  document.getElementById('upload-zone').style.display='block';
+  document.getElementById('breakdown-card').style.display='none';
+  document.getElementById('redo-card').style.display='none';
+  document.getElementById('analyse-btn').disabled=true;
+  lastResult=null;
+}
+
+
+</script>
+</body>
+</html>
