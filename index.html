@@ -577,9 +577,9 @@ header{background:var(--black);border-bottom:1px solid var(--border);padding:14p
       <div class="practice-scenario">You've just connected with someone on LinkedIn. Their profile says they are in Year 13, interested in civil engineering. First message.</div>
       <div class="practice-prompt">Which is the best opening Situation question?</div>
       <div class="options">
-        <button class="opt" data-correct="false" data-qid="q1" data-explanation="Too much, too soon. You&#39;ve introduced the programme before finding out anything about them.">Hey! I work with a programme that gives young people real sales experience and a certificate - would you be interested?</button>
-        <button class="opt" data-correct="true" data-qid="q1" data-explanation="Exactly right. Simple, personal, one question, no agenda shown yet. They&#39;ll answer this.">Hey - saw civil engineering on your profile, that is a solid path. Are you in your final year or have you just finished?</button>
-        <button class="opt" data-correct="false" data-qid="q1" data-explanation="You&#39;ve asked two things at once. People almost always answer the easier one and ignore the other. Split them up.">Hi! What are your future plans and do you have any work experience already?</button>
+        <button class="opt" onclick="handleOpt(0,this)">Hey! I work with a programme that gives young people real sales experience and a certificate - would you be interested?</button>
+        <button class="opt" onclick="handleOpt(1,this)">Hey - saw civil engineering on your profile, that is a solid path. Are you in your final year or have you just finished?</button>
+        <button class="opt" onclick="handleOpt(2,this)">Hi! What are your future plans and do you have any work experience already?</button>
       </div>
       <div class="feedback-box" id="fb-q1"></div>
     </div>
@@ -635,9 +635,9 @@ header{background:var(--black);border-bottom:1px solid var(--border);padding:14p
       <div class="practice-scenario">They've just told you they are finishing Year 13 and want to go into civil engineering. They mentioned struggling to find relevant work experience.</div>
       <div class="practice-prompt">What's the best Problem question to follow up with?</div>
       <div class="options">
-        <button class="opt" data-correct="false" data-qid="q2" data-explanation="You&#39;ve jumped straight into solution mode. They have not fully articulated the gap yet - slow down.">That's exactly what we help with - we give young people real experience. Want to hear more?</button>
-        <button class="opt" data-correct="false" data-qid="q2" data-explanation="Not bad, but it is a yes/no that might shut the conversation down. You want them to explain it in their own words.">Do you feel like you are behind compared to other people applying for the same things?</button>
-        <button class="opt" data-correct="true" data-qid="q2" data-explanation="Great. Open question, no agenda, lets them tell you exactly what the gap feels like.">That sounds frustrating - what is been the main barrier, like is it finding opportunities or is it something else?</button>
+        <button class="opt" onclick="handleOpt(3,this)">That's exactly what we help with - we give young people real experience. Want to hear more?</button>
+        <button class="opt" onclick="handleOpt(4,this)">Do you feel like you are behind compared to other people applying for the same things?</button>
+        <button class="opt" onclick="handleOpt(5,this)">That sounds frustrating - what is been the main barrier, like is it finding opportunities or is it something else?</button>
       </div>
       <div class="feedback-box" id="fb-q2"></div>
     </div>
@@ -674,9 +674,9 @@ header{background:var(--black);border-bottom:1px solid var(--border);padding:14p
       <div class="practice-scenario">They're in their first year at college, want to go into marketing. They've told you they have no real experience and their LinkedIn is empty.</div>
       <div class="practice-prompt">Which implication question works best?</div>
       <div class="options">
-        <button class="opt" data-correct="false" data-qid="q3" data-explanation="This is still a problem question - you are surfacing the gap, not exploring what it means for their future.">So you have not really done anything professional yet?</button>
-        <button class="opt" data-correct="true" data-qid="q3" data-explanation="Perfect. You&#39;ve connected the empty LinkedIn to a real consequence - without being harsh.">Marketing is competitive - do you feel like when employers Google you and find nothing, that could actually count against you?</button>
-        <button class="opt" data-correct="false" data-qid="q3" data-explanation="Too much - this feels like a lecture. Implication should come from a question, not a statement.">If you do not sort your CV and LinkedIn now you'll really struggle. A lot of people miss out because of this.</button>
+        <button class="opt" onclick="handleOpt(6,this)">So you have not really done anything professional yet?</button>
+        <button class="opt" onclick="handleOpt(7,this)">Marketing is competitive - do you feel like when employers Google you and find nothing, that could actually count against you?</button>
+        <button class="opt" onclick="handleOpt(8,this)">If you do not sort your CV and LinkedIn now you'll really struggle. A lot of people miss out because of this.</button>
       </div>
       <div class="feedback-box" id="fb-q3"></div>
     </div>
@@ -713,9 +713,9 @@ header{background:var(--black);border-bottom:1px solid var(--border);padding:14p
       <div class="practice-scenario">They've said they want something that proves they can communicate and handle pressure. Going into law, knows they need more than just grades.</div>
       <div class="practice-prompt">Which is the best Need-Payoff question?</div>
       <div class="options">
-        <button class="opt" data-correct="false" data-qid="q4" data-explanation="You&#39;re jumping into the pitch before letting them articulate the ideal solution. Earn the pitch first.">We actually have something perfect for you - field sales experience and a LinkedIn profile build. Sound good?</button>
-        <button class="opt" data-correct="true" data-qid="q4" data-explanation="Spot on. They&#39;re about to describe exactly what Inspiring Me offers. When you introduce it, they&#39;ll feel like you read their mind.">If you found something that gave you real evidence of communication and resilience - not just on paper, but something you could actually talk to in an interview - would that move the needle for you?</button>
-        <button class="opt" data-correct="false" data-qid="q4" data-explanation="This repeats the problem rather than asking about the ideal solution. Forward-focus here.">So you feel like grades alone will not be enough?</button>
+        <button class="opt" onclick="handleOpt(9,this)">We actually have something perfect for you - field sales experience and a LinkedIn profile build. Sound good?</button>
+        <button class="opt" onclick="handleOpt(10,this)">If you found something that gave you real evidence of communication and resilience - not just on paper, but something you could actually talk to in an interview - would that move the needle for you?</button>
+        <button class="opt" onclick="handleOpt(11,this)">So you feel like grades alone will not be enough?</button>
       </div>
       <div class="feedback-box" id="fb-q4"></div>
     </div>
@@ -759,9 +759,9 @@ header{background:var(--black);border-bottom:1px solid var(--border);padding:14p
       <div class="practice-scenario">They've said they want something that actually proves they can communicate, and they are worried about CV gaps going into nursing applications.</div>
       <div class="practice-prompt">You're building value. Which response works best?</div>
       <div class="options">
-        <button class="opt" data-correct="false" data-qid="q5" data-explanation="This is a features dump - not connected to what they specifically told you they needed. Reads like a leaflet.">So we offer field sales experience, LinkedIn profile building, a certificate, self-development modules, and it runs on weekends. Really worth checking out.</button>
-        <button class="opt" data-correct="true" data-qid="q5" data-explanation="This directly links each element to what they said. They&#39;ll feel like you actually listened. That builds trust fast.">Because you mentioned the CV gap and wanting to show you can communicate - the field sales side is where that gets built. You're actually doing it, not just watching. And the certificate gives you something concrete to point to in your application.</button>
-        <button class="opt" data-correct="false" data-qid="q5" data-explanation="Too vague - does not connect to their specific situation. Be precise.">It teaches you a lot of useful things, definitely worth looking into.</button>
+        <button class="opt" onclick="handleOpt(12,this)">So we offer field sales experience, LinkedIn profile building, a certificate, self-development modules, and it runs on weekends. Really worth checking out.</button>
+        <button class="opt" onclick="handleOpt(13,this)">Because you mentioned the CV gap and wanting to show you can communicate - the field sales side is where that gets built. You're actually doing it, not just watching. And the certificate gives you something concrete to point to in your application.</button>
+        <button class="opt" onclick="handleOpt(14,this)">It teaches you a lot of useful things, definitely worth looking into.</button>
       </div>
       <div class="feedback-box" id="fb-q5"></div>
     </div>
@@ -823,9 +823,9 @@ header{background:var(--black);border-bottom:1px solid var(--border);padding:14p
       <div class="practice-scenario">They've said "sounds interesting, I might be up for that." Engaged but not committed yet.</div>
       <div class="practice-prompt">What's the best close?</div>
       <div class="options">
-        <button class="opt" data-correct="false" data-qid="q6" data-explanation="Too much pressure. secure your spot and limited feels pushy - you have built a good conversation, do not kill it here.">You need to sign up quick - spots are limited. Here's the link, secure yours now: [link]</button>
-        <button class="opt" data-correct="false" data-qid="q6" data-explanation="You&#39;re stepping back when you should be moving forward. Give them the next step.">Ok let me know if you want to hear more at some point!</button>
-        <button class="opt" data-correct="true" data-qid="q6" data-explanation="Spot on. Light, clear, low pressure. One next step. That&#39;s a good close.">Nice - easiest next step is just getting your details in, it is a short form. We can go through everything from there: [link]</button>
+        <button class="opt" onclick="handleOpt(15,this)">You need to sign up quick - spots are limited. Here's the link, secure yours now: [link]</button>
+        <button class="opt" onclick="handleOpt(16,this)">Ok let me know if you want to hear more at some point!</button>
+        <button class="opt" onclick="handleOpt(17,this)">Nice - easiest next step is just getting your details in, it is a short form. We can go through everything from there: [link]</button>
       </div>
       <div class="feedback-box" id="fb-q6"></div>
     </div>
@@ -881,9 +881,9 @@ header{background:var(--black);border-bottom:1px solid var(--border);padding:14p
       <div class="practice-scenario">They say: "I have heard about things like this before and they are usually just trying to get free labour."</div>
       <div class="practice-prompt">Best response?</div>
       <div class="options">
-        <button class="opt" data-correct="false" data-qid="q7" data-explanation="You&#39;re being defensive - that puts people off. Acknowledge first, always.">That's not what this is at all, this is a legitimate registered organisation.</button>
-        <button class="opt" data-correct="true" data-qid="q7" data-explanation="Acknowledge, address the specific concern, then move forward. That&#39;s the formula working.">That's a fair concern and honestly there are dodgy ones out there. This is a registered CIC - you can look it up, it is on Companies House. And there are real people on LinkedIn who've done it. I can send you the page if you want to take a look before deciding anything?</button>
-        <button class="opt" data-correct="false" data-qid="q7" data-explanation="You&#39;ve given up. An objection is not a no - it is a question. Keep going.">No worries, I get it - if you change your mind just let me know!</button>
+        <button class="opt" onclick="handleOpt(18,this)">That's not what this is at all, this is a legitimate registered organisation.</button>
+        <button class="opt" onclick="handleOpt(19,this)">That's a fair concern and honestly there are dodgy ones out there. This is a registered CIC - you can look it up, it is on Companies House. And there are real people on LinkedIn who've done it. I can send you the page if you want to take a look before deciding anything?</button>
+        <button class="opt" onclick="handleOpt(20,this)">No worries, I get it - if you change your mind just let me know!</button>
       </div>
       <div class="feedback-box" id="fb-q7"></div>
     </div>
@@ -1285,15 +1285,35 @@ function checkAnswer(btn,correct,qid,explanation){
   }
 }
 
-// Delegated click handler for all .opt buttons using data attributes
-document.addEventListener('click',function(e){
-  const btn=e.target.closest('.opt');
-  if(!btn||btn.disabled||btn.hasAttribute('disabled'))return;
-  const correct=btn.getAttribute('data-correct')==='true';
-  const qid=btn.getAttribute('data-qid');
-  const explanation=btn.getAttribute('data-explanation')||'';
-  if(qid)checkAnswer(btn,correct,qid,explanation);
-});
+const OPT_DATA={
+  0:{correct:false,qid:"q1",explanation:"Too much, too soon. You've introduced the programme before finding out anything about them."},
+  1:{correct:true,qid:"q1",explanation:"Exactly right. Simple, personal, one question, no agenda shown yet. They'll answer this."},
+  2:{correct:false,qid:"q1",explanation:"You've asked two things at once. People almost always answer the easier one and ignore the other. Split them up."},
+  3:{correct:false,qid:"q2",explanation:"You've jumped straight into solution mode. They have not fully articulated the gap yet - slow down."},
+  4:{correct:false,qid:"q2",explanation:"Not bad, but it is a yes/no that might shut the conversation down. You want them to explain it in their own words."},
+  5:{correct:true,qid:"q2",explanation:"Great. Open question, no agenda, lets them tell you exactly what the gap feels like."},
+  6:{correct:false,qid:"q3",explanation:"This is still a problem question - you are surfacing the gap, not exploring what it means for their future."},
+  7:{correct:true,qid:"q3",explanation:"Perfect. You've connected the empty LinkedIn to a real consequence - without being harsh."},
+  8:{correct:false,qid:"q3",explanation:"Too much - this feels like a lecture. Implication should come from a question, not a statement."},
+  9:{correct:false,qid:"q4",explanation:"You're jumping into the pitch before letting them articulate the ideal solution. Earn the pitch first."},
+  10:{correct:true,qid:"q4",explanation:"Spot on. They're about to describe exactly what Inspiring Me offers. When you introduce it, they'll feel like you read their mind."},
+  11:{correct:false,qid:"q4",explanation:"This repeats the problem rather than asking about the ideal solution. Forward-focus here."},
+  12:{correct:false,qid:"q5",explanation:"This is a features dump - not connected to what they specifically told you they needed. Reads like a leaflet."},
+  13:{correct:true,qid:"q5",explanation:"This directly links each element to what they said. They'll feel like you actually listened. That builds trust fast."},
+  14:{correct:false,qid:"q5",explanation:"Too vague - does not connect to their specific situation. Be precise."},
+  15:{correct:false,qid:"q6",explanation:"Too much pressure. secure your spot and limited feels pushy - you have built a good conversation, do not kill it here."},
+  16:{correct:false,qid:"q6",explanation:"You're stepping back when you should be moving forward. Give them the next step."},
+  17:{correct:true,qid:"q6",explanation:"Spot on. Light, clear, low pressure. One next step. That's a good close."},
+  18:{correct:false,qid:"q7",explanation:"You're being defensive - that puts people off. Acknowledge first, always."},
+  19:{correct:true,qid:"q7",explanation:"Acknowledge, address the specific concern, then move forward. That's the formula working."},
+  20:{correct:false,qid:"q7",explanation:"You've given up. An objection is not a no - it is a question. Keep going."},
+};
+
+function handleOpt(idx,el){
+  const data=OPT_DATA[idx];
+  if(!data)return;
+  checkAnswer(el,data.correct===true||data.correct==='true',data.qid,data.explanation);
+}
 function resetQuestion(qid,btn){
   const fb=document.getElementById('fb-'+qid);
   const wrap=fb.closest('.practice-wrap');
