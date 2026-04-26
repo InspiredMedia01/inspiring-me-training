@@ -151,7 +151,7 @@ nav{flex:1;padding:8px 0;}
 .opt:hover:not(:disabled){border-color:var(--gold);background:var(--gold-pale);color:var(--white);}
 .opt.correct{border-color:var(--green-bright);background:var(--green-pale);color:#86efac;}
 .opt.wrong{border-color:#ef4444;background:rgba(239,68,68,0.08);color:#fca5a5;}
-.opt:disabled{pointer-events:none;}
+.opt:disabled{pointer-events:none;} .opt:not([disabled]):not(:disabled){pointer-events:auto;cursor:pointer;}
 .feedback-box{display:none;margin-top:12px;padding:12px 15px;border-radius:7px;font-size:13px;line-height:1.5;}
 .feedback-box.show{display:block;}
 .feedback-box.good{background:rgba(90,158,56,0.1);border:1px solid rgba(90,158,56,0.3);color:#86efac;}
@@ -1258,7 +1258,7 @@ function updateProgress(){
 
 function checkAnswer(btn,correct,qid,explanation){
   const opts=btn.parentElement.querySelectorAll('.opt');
-  opts.forEach(s=>{s.disabled=true;});
+  opts.forEach(s=>{s.disabled=true;s.setAttribute('disabled','true');});
   btn.classList.add(correct?'correct':'wrong');
   const fb=document.getElementById('fb-'+qid);
   if(correct){
@@ -1273,12 +1273,14 @@ function resetQuestion(qid,btn){
   const fb=document.getElementById('fb-'+qid);
   fb.className='feedback-box';
   fb.innerHTML='';
-  // re-enable all options in the parent practice-wrap
-  const wrap=btn.closest('.practice-wrap');
+  const wrap=document.getElementById('fb-'+qid).closest('.practice-wrap');
   if(wrap){
     wrap.querySelectorAll('.opt').forEach(o=>{
       o.disabled=false;
+      o.removeAttribute('disabled');
       o.classList.remove('correct','wrong','disabled');
+      o.style.pointerEvents='';
+      o.style.opacity='';
     });
   }
 }
